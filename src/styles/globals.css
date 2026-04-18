@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Segoe UI", "Noto Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Muheshimiwa Brand Colors */
+  --color-md-green: #016629;
+  --color-md-gold: #FDC71B;
+  --color-md-dark: #2F1041;
+
+  /* Tailwind color mapping */
+  --color-green-muheshimiwa: #016629;
+  --color-yellow-muheshimiwa: #FDC71B;
+  --color-dark-muheshimiwa: #2F1041;
+}
+
+@layer utilities {
+  .text-md-green {
+    @apply text-[#016629];
+  }
+
+  .text-md-gold {
+    @apply text-[#FDC71B];
+  }
+
+  .text-md-dark {
+    @apply text-[#2F1041];
+  }
+
+  .bg-md-green {
+    @apply bg-[#016629];
+  }
+
+  .bg-md-gold {
+    @apply bg-[#FDC71B];
+  }
+
+  .bg-md-dark {
+    @apply bg-[#2F1041];
+  }
+
+  .border-md-green {
+    @apply border-[#016629];
+  }
+
+  .border-md-gold {
+    @apply border-[#FDC71B];
+  }
+
+  .border-md-dark {
+    @apply border-[#2F1041];
+  }
+
+  .hover\:bg-md-green:hover {
+    @apply bg-[#01552a];
+  }
+
+  .hover\:text-md-green:hover {
+    @apply text-[#01552a];
+  }
+}

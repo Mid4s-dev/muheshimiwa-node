@@ -1,0 +1,16 @@
+{
+  "name": "Muheshimiwa - Embakasi Central Campaign",
+  "short_name": "Muheshimiwa",
+  "description": "Vote for Real Change. Hon. Mejja Donk for Embakasi Central MP",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#016629",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    }
+  ]
+}

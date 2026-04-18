@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#016629"/>
+      <stop offset="100%" stop-color="#2F1041"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="#ffffff"/>
+  <rect x="0" y="0" width="1280" height="340" fill="url(#hero)"/>
+  <text x="84" y="148" fill="#FDC71B" font-family="Segoe UI, Arial, sans-serif" font-size="32" font-weight="700">Muheshimiwa Campaign</text>
+  <text x="84" y="220" fill="#ffffff" font-family="Segoe UI, Arial, sans-serif" font-size="56" font-weight="800">Embakasi Deserves Better</text>
+  <rect x="84" y="264" width="260" height="58" rx="10" fill="#FDC71B"/>
+  <rect x="360" y="264" width="280" height="58" rx="10" fill="rgba(255,255,255,0.28)"/>
+  <rect x="84" y="390" width="350" height="250" rx="14" fill="#f3f4f6"/>
+  <rect x="464" y="390" width="350" height="250" rx="14" fill="#f3f4f6"/>
+  <rect x="844" y="390" width="350" height="250" rx="14" fill="#f3f4f6"/>
+</svg>
