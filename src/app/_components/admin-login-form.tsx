@@ -2,14 +2,12 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
 
 export function AdminLoginForm() {
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,9 +15,9 @@ export function AdminLoginForm() {
     setIsLoading(true);
 
     try {
-      const mapError = (value: string | null, code: string | null) => {
+      const mapError = (value: string | null) => {
         if (!value) return "Invalid credentials";
-        if (value === "CredentialsSignin" || code === "credentials") {
+        if (value === "CredentialsSignin") {
           return "Invalid username/email or password.";
         }
         return "Login failed. Please try again.";
@@ -33,7 +31,7 @@ export function AdminLoginForm() {
       });
 
       if (result?.error) {
-        setError(mapError(result.error, result.code ?? null));
+        setError(mapError(result.error));
         return;
       }
 

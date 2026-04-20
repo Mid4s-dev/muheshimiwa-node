@@ -39,25 +39,20 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTokenPayload>
 /**
- * Model Voter
- * 
- */
-export type Voter = $Result.DefaultSelection<Prisma.$VoterPayload>
-/**
  * Model Project
  * 
  */
 export type Project = $Result.DefaultSelection<Prisma.$ProjectPayload>
 /**
+ * Model ProjectMedia
+ * 
+ */
+export type ProjectMedia = $Result.DefaultSelection<Prisma.$ProjectMediaPayload>
+/**
  * Model PollingStation
  * 
  */
 export type PollingStation = $Result.DefaultSelection<Prisma.$PollingStationPayload>
-/**
- * Model BursaryApplication
- * 
- */
-export type BursaryApplication = $Result.DefaultSelection<Prisma.$BursaryApplicationPayload>
 /**
  * Model BursaryDistribution
  * 
@@ -243,16 +238,6 @@ export class PrismaClient<
   get verificationToken(): Prisma.VerificationTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.voter`: Exposes CRUD operations for the **Voter** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Voters
-    * const voters = await prisma.voter.findMany()
-    * ```
-    */
-  get voter(): Prisma.VoterDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.project`: Exposes CRUD operations for the **Project** model.
     * Example usage:
     * ```ts
@@ -263,6 +248,16 @@ export class PrismaClient<
   get project(): Prisma.ProjectDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.projectMedia`: Exposes CRUD operations for the **ProjectMedia** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProjectMedias
+    * const projectMedias = await prisma.projectMedia.findMany()
+    * ```
+    */
+  get projectMedia(): Prisma.ProjectMediaDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.pollingStation`: Exposes CRUD operations for the **PollingStation** model.
     * Example usage:
     * ```ts
@@ -271,16 +266,6 @@ export class PrismaClient<
     * ```
     */
   get pollingStation(): Prisma.PollingStationDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.bursaryApplication`: Exposes CRUD operations for the **BursaryApplication** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more BursaryApplications
-    * const bursaryApplications = await prisma.bursaryApplication.findMany()
-    * ```
-    */
-  get bursaryApplication(): Prisma.BursaryApplicationDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.bursaryDistribution`: Exposes CRUD operations for the **BursaryDistribution** model.
@@ -757,10 +742,9 @@ export namespace Prisma {
     Session: 'Session',
     User: 'User',
     VerificationToken: 'VerificationToken',
-    Voter: 'Voter',
     Project: 'Project',
+    ProjectMedia: 'ProjectMedia',
     PollingStation: 'PollingStation',
-    BursaryApplication: 'BursaryApplication',
     BursaryDistribution: 'BursaryDistribution',
     MailingList: 'MailingList',
     ImpactStory: 'ImpactStory'
@@ -782,7 +766,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "post" | "account" | "session" | "user" | "verificationToken" | "voter" | "project" | "pollingStation" | "bursaryApplication" | "bursaryDistribution" | "mailingList" | "impactStory"
+      modelProps: "post" | "account" | "session" | "user" | "verificationToken" | "project" | "projectMedia" | "pollingStation" | "bursaryDistribution" | "mailingList" | "impactStory"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1116,72 +1100,6 @@ export namespace Prisma {
           }
         }
       }
-      Voter: {
-        payload: Prisma.$VoterPayload<ExtArgs>
-        fields: Prisma.VoterFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.VoterFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.VoterFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload>
-          }
-          findFirst: {
-            args: Prisma.VoterFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.VoterFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload>
-          }
-          findMany: {
-            args: Prisma.VoterFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload>[]
-          }
-          create: {
-            args: Prisma.VoterCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload>
-          }
-          createMany: {
-            args: Prisma.VoterCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.VoterDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload>
-          }
-          update: {
-            args: Prisma.VoterUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload>
-          }
-          deleteMany: {
-            args: Prisma.VoterDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.VoterUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.VoterUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$VoterPayload>
-          }
-          aggregate: {
-            args: Prisma.VoterAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateVoter>
-          }
-          groupBy: {
-            args: Prisma.VoterGroupByArgs<ExtArgs>
-            result: $Utils.Optional<VoterGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.VoterCountArgs<ExtArgs>
-            result: $Utils.Optional<VoterCountAggregateOutputType> | number
-          }
-        }
-      }
       Project: {
         payload: Prisma.$ProjectPayload<ExtArgs>
         fields: Prisma.ProjectFieldRefs
@@ -1248,6 +1166,72 @@ export namespace Prisma {
           }
         }
       }
+      ProjectMedia: {
+        payload: Prisma.$ProjectMediaPayload<ExtArgs>
+        fields: Prisma.ProjectMediaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProjectMediaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProjectMediaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload>
+          }
+          findFirst: {
+            args: Prisma.ProjectMediaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProjectMediaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload>
+          }
+          findMany: {
+            args: Prisma.ProjectMediaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload>[]
+          }
+          create: {
+            args: Prisma.ProjectMediaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload>
+          }
+          createMany: {
+            args: Prisma.ProjectMediaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ProjectMediaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload>
+          }
+          update: {
+            args: Prisma.ProjectMediaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProjectMediaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProjectMediaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ProjectMediaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectMediaPayload>
+          }
+          aggregate: {
+            args: Prisma.ProjectMediaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProjectMedia>
+          }
+          groupBy: {
+            args: Prisma.ProjectMediaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProjectMediaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProjectMediaCountArgs<ExtArgs>
+            result: $Utils.Optional<ProjectMediaCountAggregateOutputType> | number
+          }
+        }
+      }
       PollingStation: {
         payload: Prisma.$PollingStationPayload<ExtArgs>
         fields: Prisma.PollingStationFieldRefs
@@ -1311,72 +1295,6 @@ export namespace Prisma {
           count: {
             args: Prisma.PollingStationCountArgs<ExtArgs>
             result: $Utils.Optional<PollingStationCountAggregateOutputType> | number
-          }
-        }
-      }
-      BursaryApplication: {
-        payload: Prisma.$BursaryApplicationPayload<ExtArgs>
-        fields: Prisma.BursaryApplicationFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.BursaryApplicationFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.BursaryApplicationFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload>
-          }
-          findFirst: {
-            args: Prisma.BursaryApplicationFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.BursaryApplicationFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload>
-          }
-          findMany: {
-            args: Prisma.BursaryApplicationFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload>[]
-          }
-          create: {
-            args: Prisma.BursaryApplicationCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload>
-          }
-          createMany: {
-            args: Prisma.BursaryApplicationCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.BursaryApplicationDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload>
-          }
-          update: {
-            args: Prisma.BursaryApplicationUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload>
-          }
-          deleteMany: {
-            args: Prisma.BursaryApplicationDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.BursaryApplicationUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.BursaryApplicationUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BursaryApplicationPayload>
-          }
-          aggregate: {
-            args: Prisma.BursaryApplicationAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateBursaryApplication>
-          }
-          groupBy: {
-            args: Prisma.BursaryApplicationGroupByArgs<ExtArgs>
-            result: $Utils.Optional<BursaryApplicationGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.BursaryApplicationCountArgs<ExtArgs>
-            result: $Utils.Optional<BursaryApplicationCountAggregateOutputType> | number
           }
         }
       }
@@ -1679,10 +1597,9 @@ export namespace Prisma {
     session?: SessionOmit
     user?: UserOmit
     verificationToken?: VerificationTokenOmit
-    voter?: VoterOmit
     project?: ProjectOmit
+    projectMedia?: ProjectMediaOmit
     pollingStation?: PollingStationOmit
-    bursaryApplication?: BursaryApplicationOmit
     bursaryDistribution?: BursaryDistributionOmit
     mailingList?: MailingListOmit
     impactStory?: ImpactStoryOmit
@@ -1769,14 +1686,12 @@ export namespace Prisma {
     accounts: number
     sessions: number
     posts: number
-    bursaryApps: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     posts?: boolean | UserCountOutputTypeCountPostsArgs
-    bursaryApps?: boolean | UserCountOutputTypeCountBursaryAppsArgs
   }
 
   // Custom InputTypes
@@ -1811,42 +1726,35 @@ export namespace Prisma {
     where?: PostWhereInput
   }
 
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountBursaryAppsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BursaryApplicationWhereInput
-  }
-
 
   /**
-   * Count Type VoterCountOutputType
+   * Count Type ProjectCountOutputType
    */
 
-  export type VoterCountOutputType = {
-    bursaryApplications: number
+  export type ProjectCountOutputType = {
+    media: number
   }
 
-  export type VoterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    bursaryApplications?: boolean | VoterCountOutputTypeCountBursaryApplicationsArgs
+  export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    media?: boolean | ProjectCountOutputTypeCountMediaArgs
   }
 
   // Custom InputTypes
   /**
-   * VoterCountOutputType without action
+   * ProjectCountOutputType without action
    */
-  export type VoterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ProjectCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the VoterCountOutputType
+     * Select specific fields to fetch from the ProjectCountOutputType
      */
-    select?: VoterCountOutputTypeSelect<ExtArgs> | null
+    select?: ProjectCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * VoterCountOutputType without action
+   * ProjectCountOutputType without action
    */
-  export type VoterCountOutputTypeCountBursaryApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BursaryApplicationWhereInput
+  export type ProjectCountOutputTypeCountMediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectMediaWhereInput
   }
 
 
@@ -5005,8 +4913,6 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
-    voters?: boolean | User$votersArgs<ExtArgs>
-    bursaryApps?: boolean | User$bursaryAppsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -5031,8 +4937,6 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     posts?: boolean | User$postsArgs<ExtArgs>
-    voters?: boolean | User$votersArgs<ExtArgs>
-    bursaryApps?: boolean | User$bursaryAppsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5042,8 +4946,6 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       posts: Prisma.$PostPayload<ExtArgs>[]
-      voters: Prisma.$VoterPayload<ExtArgs> | null
-      bursaryApps: Prisma.$BursaryApplicationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5400,8 +5302,6 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     posts<T extends User$postsArgs<ExtArgs> = {}>(args?: Subset<T, User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    voters<T extends User$votersArgs<ExtArgs> = {}>(args?: Subset<T, User$votersArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    bursaryApps<T extends User$bursaryAppsArgs<ExtArgs> = {}>(args?: Subset<T, User$bursaryAppsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5854,49 +5754,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PostScalarFieldEnum | PostScalarFieldEnum[]
-  }
-
-  /**
-   * User.voters
-   */
-  export type User$votersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    where?: VoterWhereInput
-  }
-
-  /**
-   * User.bursaryApps
-   */
-  export type User$bursaryAppsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    where?: BursaryApplicationWhereInput
-    orderBy?: BursaryApplicationOrderByWithRelationInput | BursaryApplicationOrderByWithRelationInput[]
-    cursor?: BursaryApplicationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BursaryApplicationScalarFieldEnum | BursaryApplicationScalarFieldEnum[]
   }
 
   /**
@@ -6790,1009 +6647,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Voter
-   */
-
-  export type AggregateVoter = {
-    _count: VoterCountAggregateOutputType | null
-    _min: VoterMinAggregateOutputType | null
-    _max: VoterMaxAggregateOutputType | null
-  }
-
-  export type VoterMinAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    phone: string | null
-    name: string | null
-    ward: string | null
-    status: string | null
-    smsToken: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VoterMaxAggregateOutputType = {
-    id: string | null
-    userId: string | null
-    phone: string | null
-    name: string | null
-    ward: string | null
-    status: string | null
-    smsToken: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type VoterCountAggregateOutputType = {
-    id: number
-    userId: number
-    phone: number
-    name: number
-    ward: number
-    status: number
-    smsToken: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type VoterMinAggregateInputType = {
-    id?: true
-    userId?: true
-    phone?: true
-    name?: true
-    ward?: true
-    status?: true
-    smsToken?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VoterMaxAggregateInputType = {
-    id?: true
-    userId?: true
-    phone?: true
-    name?: true
-    ward?: true
-    status?: true
-    smsToken?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type VoterCountAggregateInputType = {
-    id?: true
-    userId?: true
-    phone?: true
-    name?: true
-    ward?: true
-    status?: true
-    smsToken?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type VoterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Voter to aggregate.
-     */
-    where?: VoterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Voters to fetch.
-     */
-    orderBy?: VoterOrderByWithRelationInput | VoterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: VoterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Voters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Voters.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Voters
-    **/
-    _count?: true | VoterCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: VoterMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: VoterMaxAggregateInputType
-  }
-
-  export type GetVoterAggregateType<T extends VoterAggregateArgs> = {
-        [P in keyof T & keyof AggregateVoter]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateVoter[P]>
-      : GetScalarType<T[P], AggregateVoter[P]>
-  }
-
-
-
-
-  export type VoterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: VoterWhereInput
-    orderBy?: VoterOrderByWithAggregationInput | VoterOrderByWithAggregationInput[]
-    by: VoterScalarFieldEnum[] | VoterScalarFieldEnum
-    having?: VoterScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: VoterCountAggregateInputType | true
-    _min?: VoterMinAggregateInputType
-    _max?: VoterMaxAggregateInputType
-  }
-
-  export type VoterGroupByOutputType = {
-    id: string
-    userId: string
-    phone: string
-    name: string
-    ward: string
-    status: string
-    smsToken: string
-    createdAt: Date
-    updatedAt: Date
-    _count: VoterCountAggregateOutputType | null
-    _min: VoterMinAggregateOutputType | null
-    _max: VoterMaxAggregateOutputType | null
-  }
-
-  type GetVoterGroupByPayload<T extends VoterGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<VoterGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof VoterGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], VoterGroupByOutputType[P]>
-            : GetScalarType<T[P], VoterGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type VoterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    userId?: boolean
-    phone?: boolean
-    name?: boolean
-    ward?: boolean
-    status?: boolean
-    smsToken?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    bursaryApplications?: boolean | Voter$bursaryApplicationsArgs<ExtArgs>
-    _count?: boolean | VoterCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["voter"]>
-
-
-
-  export type VoterSelectScalar = {
-    id?: boolean
-    userId?: boolean
-    phone?: boolean
-    name?: boolean
-    ward?: boolean
-    status?: boolean
-    smsToken?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type VoterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "phone" | "name" | "ward" | "status" | "smsToken" | "createdAt" | "updatedAt", ExtArgs["result"]["voter"]>
-  export type VoterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-    bursaryApplications?: boolean | Voter$bursaryApplicationsArgs<ExtArgs>
-    _count?: boolean | VoterCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-  export type $VoterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Voter"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-      bursaryApplications: Prisma.$BursaryApplicationPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      userId: string
-      phone: string
-      name: string
-      ward: string
-      status: string
-      smsToken: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["voter"]>
-    composites: {}
-  }
-
-  type VoterGetPayload<S extends boolean | null | undefined | VoterDefaultArgs> = $Result.GetResult<Prisma.$VoterPayload, S>
-
-  type VoterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<VoterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: VoterCountAggregateInputType | true
-    }
-
-  export interface VoterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Voter'], meta: { name: 'Voter' } }
-    /**
-     * Find zero or one Voter that matches the filter.
-     * @param {VoterFindUniqueArgs} args - Arguments to find a Voter
-     * @example
-     * // Get one Voter
-     * const voter = await prisma.voter.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends VoterFindUniqueArgs>(args: SelectSubset<T, VoterFindUniqueArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Voter that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {VoterFindUniqueOrThrowArgs} args - Arguments to find a Voter
-     * @example
-     * // Get one Voter
-     * const voter = await prisma.voter.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends VoterFindUniqueOrThrowArgs>(args: SelectSubset<T, VoterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Voter that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VoterFindFirstArgs} args - Arguments to find a Voter
-     * @example
-     * // Get one Voter
-     * const voter = await prisma.voter.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends VoterFindFirstArgs>(args?: SelectSubset<T, VoterFindFirstArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Voter that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VoterFindFirstOrThrowArgs} args - Arguments to find a Voter
-     * @example
-     * // Get one Voter
-     * const voter = await prisma.voter.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends VoterFindFirstOrThrowArgs>(args?: SelectSubset<T, VoterFindFirstOrThrowArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Voters that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VoterFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Voters
-     * const voters = await prisma.voter.findMany()
-     * 
-     * // Get first 10 Voters
-     * const voters = await prisma.voter.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const voterWithIdOnly = await prisma.voter.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends VoterFindManyArgs>(args?: SelectSubset<T, VoterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Voter.
-     * @param {VoterCreateArgs} args - Arguments to create a Voter.
-     * @example
-     * // Create one Voter
-     * const Voter = await prisma.voter.create({
-     *   data: {
-     *     // ... data to create a Voter
-     *   }
-     * })
-     * 
-     */
-    create<T extends VoterCreateArgs>(args: SelectSubset<T, VoterCreateArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Voters.
-     * @param {VoterCreateManyArgs} args - Arguments to create many Voters.
-     * @example
-     * // Create many Voters
-     * const voter = await prisma.voter.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends VoterCreateManyArgs>(args?: SelectSubset<T, VoterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Voter.
-     * @param {VoterDeleteArgs} args - Arguments to delete one Voter.
-     * @example
-     * // Delete one Voter
-     * const Voter = await prisma.voter.delete({
-     *   where: {
-     *     // ... filter to delete one Voter
-     *   }
-     * })
-     * 
-     */
-    delete<T extends VoterDeleteArgs>(args: SelectSubset<T, VoterDeleteArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Voter.
-     * @param {VoterUpdateArgs} args - Arguments to update one Voter.
-     * @example
-     * // Update one Voter
-     * const voter = await prisma.voter.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends VoterUpdateArgs>(args: SelectSubset<T, VoterUpdateArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Voters.
-     * @param {VoterDeleteManyArgs} args - Arguments to filter Voters to delete.
-     * @example
-     * // Delete a few Voters
-     * const { count } = await prisma.voter.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends VoterDeleteManyArgs>(args?: SelectSubset<T, VoterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Voters.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VoterUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Voters
-     * const voter = await prisma.voter.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends VoterUpdateManyArgs>(args: SelectSubset<T, VoterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Voter.
-     * @param {VoterUpsertArgs} args - Arguments to update or create a Voter.
-     * @example
-     * // Update or create a Voter
-     * const voter = await prisma.voter.upsert({
-     *   create: {
-     *     // ... data to create a Voter
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Voter we want to update
-     *   }
-     * })
-     */
-    upsert<T extends VoterUpsertArgs>(args: SelectSubset<T, VoterUpsertArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Voters.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VoterCountArgs} args - Arguments to filter Voters to count.
-     * @example
-     * // Count the number of Voters
-     * const count = await prisma.voter.count({
-     *   where: {
-     *     // ... the filter for the Voters we want to count
-     *   }
-     * })
-    **/
-    count<T extends VoterCountArgs>(
-      args?: Subset<T, VoterCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], VoterCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Voter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VoterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends VoterAggregateArgs>(args: Subset<T, VoterAggregateArgs>): Prisma.PrismaPromise<GetVoterAggregateType<T>>
-
-    /**
-     * Group by Voter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {VoterGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends VoterGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: VoterGroupByArgs['orderBy'] }
-        : { orderBy?: VoterGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, VoterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVoterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Voter model
-   */
-  readonly fields: VoterFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Voter.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__VoterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    bursaryApplications<T extends Voter$bursaryApplicationsArgs<ExtArgs> = {}>(args?: Subset<T, Voter$bursaryApplicationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Voter model
-   */
-  interface VoterFieldRefs {
-    readonly id: FieldRef<"Voter", 'String'>
-    readonly userId: FieldRef<"Voter", 'String'>
-    readonly phone: FieldRef<"Voter", 'String'>
-    readonly name: FieldRef<"Voter", 'String'>
-    readonly ward: FieldRef<"Voter", 'String'>
-    readonly status: FieldRef<"Voter", 'String'>
-    readonly smsToken: FieldRef<"Voter", 'String'>
-    readonly createdAt: FieldRef<"Voter", 'DateTime'>
-    readonly updatedAt: FieldRef<"Voter", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Voter findUnique
-   */
-  export type VoterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * Filter, which Voter to fetch.
-     */
-    where: VoterWhereUniqueInput
-  }
-
-  /**
-   * Voter findUniqueOrThrow
-   */
-  export type VoterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * Filter, which Voter to fetch.
-     */
-    where: VoterWhereUniqueInput
-  }
-
-  /**
-   * Voter findFirst
-   */
-  export type VoterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * Filter, which Voter to fetch.
-     */
-    where?: VoterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Voters to fetch.
-     */
-    orderBy?: VoterOrderByWithRelationInput | VoterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Voters.
-     */
-    cursor?: VoterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Voters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Voters.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Voters.
-     */
-    distinct?: VoterScalarFieldEnum | VoterScalarFieldEnum[]
-  }
-
-  /**
-   * Voter findFirstOrThrow
-   */
-  export type VoterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * Filter, which Voter to fetch.
-     */
-    where?: VoterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Voters to fetch.
-     */
-    orderBy?: VoterOrderByWithRelationInput | VoterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Voters.
-     */
-    cursor?: VoterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Voters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Voters.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Voters.
-     */
-    distinct?: VoterScalarFieldEnum | VoterScalarFieldEnum[]
-  }
-
-  /**
-   * Voter findMany
-   */
-  export type VoterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * Filter, which Voters to fetch.
-     */
-    where?: VoterWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Voters to fetch.
-     */
-    orderBy?: VoterOrderByWithRelationInput | VoterOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Voters.
-     */
-    cursor?: VoterWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Voters from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Voters.
-     */
-    skip?: number
-    distinct?: VoterScalarFieldEnum | VoterScalarFieldEnum[]
-  }
-
-  /**
-   * Voter create
-   */
-  export type VoterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Voter.
-     */
-    data: XOR<VoterCreateInput, VoterUncheckedCreateInput>
-  }
-
-  /**
-   * Voter createMany
-   */
-  export type VoterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Voters.
-     */
-    data: VoterCreateManyInput | VoterCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Voter update
-   */
-  export type VoterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Voter.
-     */
-    data: XOR<VoterUpdateInput, VoterUncheckedUpdateInput>
-    /**
-     * Choose, which Voter to update.
-     */
-    where: VoterWhereUniqueInput
-  }
-
-  /**
-   * Voter updateMany
-   */
-  export type VoterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Voters.
-     */
-    data: XOR<VoterUpdateManyMutationInput, VoterUncheckedUpdateManyInput>
-    /**
-     * Filter which Voters to update
-     */
-    where?: VoterWhereInput
-    /**
-     * Limit how many Voters to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Voter upsert
-   */
-  export type VoterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Voter to update in case it exists.
-     */
-    where: VoterWhereUniqueInput
-    /**
-     * In case the Voter found by the `where` argument doesn't exist, create a new Voter with this data.
-     */
-    create: XOR<VoterCreateInput, VoterUncheckedCreateInput>
-    /**
-     * In case the Voter was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<VoterUpdateInput, VoterUncheckedUpdateInput>
-  }
-
-  /**
-   * Voter delete
-   */
-  export type VoterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-    /**
-     * Filter which Voter to delete.
-     */
-    where: VoterWhereUniqueInput
-  }
-
-  /**
-   * Voter deleteMany
-   */
-  export type VoterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Voters to delete
-     */
-    where?: VoterWhereInput
-    /**
-     * Limit how many Voters to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Voter.bursaryApplications
-   */
-  export type Voter$bursaryApplicationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    where?: BursaryApplicationWhereInput
-    orderBy?: BursaryApplicationOrderByWithRelationInput | BursaryApplicationOrderByWithRelationInput[]
-    cursor?: BursaryApplicationWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BursaryApplicationScalarFieldEnum | BursaryApplicationScalarFieldEnum[]
-  }
-
-  /**
-   * Voter without action
-   */
-  export type VoterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Voter
-     */
-    select?: VoterSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Voter
-     */
-    omit?: VoterOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: VoterInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Project
    */
 
@@ -7808,6 +6662,7 @@ export namespace Prisma {
     description: string | null
     category: string | null
     image: string | null
+    location: string | null
     status: string | null
     ward: string | null
     impact: string | null
@@ -7821,6 +6676,7 @@ export namespace Prisma {
     description: string | null
     category: string | null
     image: string | null
+    location: string | null
     status: string | null
     ward: string | null
     impact: string | null
@@ -7834,6 +6690,7 @@ export namespace Prisma {
     description: number
     category: number
     image: number
+    location: number
     status: number
     ward: number
     impact: number
@@ -7849,6 +6706,7 @@ export namespace Prisma {
     description?: true
     category?: true
     image?: true
+    location?: true
     status?: true
     ward?: true
     impact?: true
@@ -7862,6 +6720,7 @@ export namespace Prisma {
     description?: true
     category?: true
     image?: true
+    location?: true
     status?: true
     ward?: true
     impact?: true
@@ -7875,6 +6734,7 @@ export namespace Prisma {
     description?: true
     category?: true
     image?: true
+    location?: true
     status?: true
     ward?: true
     impact?: true
@@ -7961,6 +6821,7 @@ export namespace Prisma {
     description: string
     category: string
     image: string | null
+    location: string | null
     status: string
     ward: string | null
     impact: string | null
@@ -7991,11 +6852,14 @@ export namespace Prisma {
     description?: boolean
     category?: boolean
     image?: boolean
+    location?: boolean
     status?: boolean
     ward?: boolean
     impact?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    media?: boolean | Project$mediaArgs<ExtArgs>
+    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
 
@@ -8006,6 +6870,7 @@ export namespace Prisma {
     description?: boolean
     category?: boolean
     image?: boolean
+    location?: boolean
     status?: boolean
     ward?: boolean
     impact?: boolean
@@ -8013,17 +6878,24 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "category" | "image" | "status" | "ward" | "impact" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "category" | "image" | "location" | "status" | "ward" | "impact" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+  export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    media?: boolean | Project$mediaArgs<ExtArgs>
+    _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $ProjectPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Project"
-    objects: {}
+    objects: {
+      media: Prisma.$ProjectMediaPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
       description: string
       category: string
       image: string | null
+      location: string | null
       status: string
       ward: string | null
       impact: string | null
@@ -8369,6 +7241,7 @@ export namespace Prisma {
    */
   export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    media<T extends Project$mediaArgs<ExtArgs> = {}>(args?: Subset<T, Project$mediaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8403,6 +7276,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Project", 'String'>
     readonly category: FieldRef<"Project", 'String'>
     readonly image: FieldRef<"Project", 'String'>
+    readonly location: FieldRef<"Project", 'String'>
     readonly status: FieldRef<"Project", 'String'>
     readonly ward: FieldRef<"Project", 'String'>
     readonly impact: FieldRef<"Project", 'String'>
@@ -8425,6 +7299,10 @@ export namespace Prisma {
      */
     omit?: ProjectOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Project to fetch.
      */
     where: ProjectWhereUniqueInput
@@ -8443,6 +7321,10 @@ export namespace Prisma {
      */
     omit?: ProjectOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Project to fetch.
      */
     where: ProjectWhereUniqueInput
@@ -8460,6 +7342,10 @@ export namespace Prisma {
      * Omit specific fields from the Project
      */
     omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
     /**
      * Filter, which Project to fetch.
      */
@@ -8509,6 +7395,10 @@ export namespace Prisma {
      */
     omit?: ProjectOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Project to fetch.
      */
     where?: ProjectWhereInput
@@ -8557,6 +7447,10 @@ export namespace Prisma {
      */
     omit?: ProjectOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter, which Projects to fetch.
      */
     where?: ProjectWhereInput
@@ -8600,6 +7494,10 @@ export namespace Prisma {
      */
     omit?: ProjectOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * The data needed to create a Project.
      */
     data: XOR<ProjectCreateInput, ProjectUncheckedCreateInput>
@@ -8628,6 +7526,10 @@ export namespace Prisma {
      * Omit specific fields from the Project
      */
     omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
     /**
      * The data needed to update a Project.
      */
@@ -8669,6 +7571,10 @@ export namespace Prisma {
      */
     omit?: ProjectOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * The filter to search for the Project to update in case it exists.
      */
     where: ProjectWhereUniqueInput
@@ -8695,6 +7601,10 @@ export namespace Prisma {
      */
     omit?: ProjectOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    /**
      * Filter which Project to delete.
      */
     where: ProjectWhereUniqueInput
@@ -8715,6 +7625,30 @@ export namespace Prisma {
   }
 
   /**
+   * Project.media
+   */
+  export type Project$mediaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    where?: ProjectMediaWhereInput
+    orderBy?: ProjectMediaOrderByWithRelationInput | ProjectMediaOrderByWithRelationInput[]
+    cursor?: ProjectMediaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectMediaScalarFieldEnum | ProjectMediaScalarFieldEnum[]
+  }
+
+  /**
    * Project without action
    */
   export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8726,6 +7660,995 @@ export namespace Prisma {
      * Omit specific fields from the Project
      */
     omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ProjectMedia
+   */
+
+  export type AggregateProjectMedia = {
+    _count: ProjectMediaCountAggregateOutputType | null
+    _avg: ProjectMediaAvgAggregateOutputType | null
+    _sum: ProjectMediaSumAggregateOutputType | null
+    _min: ProjectMediaMinAggregateOutputType | null
+    _max: ProjectMediaMaxAggregateOutputType | null
+  }
+
+  export type ProjectMediaAvgAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type ProjectMediaSumAggregateOutputType = {
+    sortOrder: number | null
+  }
+
+  export type ProjectMediaMinAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    url: string | null
+    caption: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProjectMediaMaxAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    url: string | null
+    caption: string | null
+    sortOrder: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProjectMediaCountAggregateOutputType = {
+    id: number
+    projectId: number
+    url: number
+    caption: number
+    sortOrder: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProjectMediaAvgAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type ProjectMediaSumAggregateInputType = {
+    sortOrder?: true
+  }
+
+  export type ProjectMediaMinAggregateInputType = {
+    id?: true
+    projectId?: true
+    url?: true
+    caption?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProjectMediaMaxAggregateInputType = {
+    id?: true
+    projectId?: true
+    url?: true
+    caption?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProjectMediaCountAggregateInputType = {
+    id?: true
+    projectId?: true
+    url?: true
+    caption?: true
+    sortOrder?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProjectMediaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectMedia to aggregate.
+     */
+    where?: ProjectMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectMedias to fetch.
+     */
+    orderBy?: ProjectMediaOrderByWithRelationInput | ProjectMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProjectMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectMedias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProjectMedias
+    **/
+    _count?: true | ProjectMediaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProjectMediaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProjectMediaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProjectMediaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProjectMediaMaxAggregateInputType
+  }
+
+  export type GetProjectMediaAggregateType<T extends ProjectMediaAggregateArgs> = {
+        [P in keyof T & keyof AggregateProjectMedia]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProjectMedia[P]>
+      : GetScalarType<T[P], AggregateProjectMedia[P]>
+  }
+
+
+
+
+  export type ProjectMediaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectMediaWhereInput
+    orderBy?: ProjectMediaOrderByWithAggregationInput | ProjectMediaOrderByWithAggregationInput[]
+    by: ProjectMediaScalarFieldEnum[] | ProjectMediaScalarFieldEnum
+    having?: ProjectMediaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProjectMediaCountAggregateInputType | true
+    _avg?: ProjectMediaAvgAggregateInputType
+    _sum?: ProjectMediaSumAggregateInputType
+    _min?: ProjectMediaMinAggregateInputType
+    _max?: ProjectMediaMaxAggregateInputType
+  }
+
+  export type ProjectMediaGroupByOutputType = {
+    id: string
+    projectId: string
+    url: string
+    caption: string | null
+    sortOrder: number
+    createdAt: Date
+    updatedAt: Date
+    _count: ProjectMediaCountAggregateOutputType | null
+    _avg: ProjectMediaAvgAggregateOutputType | null
+    _sum: ProjectMediaSumAggregateOutputType | null
+    _min: ProjectMediaMinAggregateOutputType | null
+    _max: ProjectMediaMaxAggregateOutputType | null
+  }
+
+  type GetProjectMediaGroupByPayload<T extends ProjectMediaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProjectMediaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProjectMediaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProjectMediaGroupByOutputType[P]>
+            : GetScalarType<T[P], ProjectMediaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProjectMediaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    url?: boolean
+    caption?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectMedia"]>
+
+
+
+  export type ProjectMediaSelectScalar = {
+    id?: boolean
+    projectId?: boolean
+    url?: boolean
+    caption?: boolean
+    sortOrder?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProjectMediaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "url" | "caption" | "sortOrder" | "createdAt" | "updatedAt", ExtArgs["result"]["projectMedia"]>
+  export type ProjectMediaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+  }
+
+  export type $ProjectMediaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProjectMedia"
+    objects: {
+      project: Prisma.$ProjectPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      projectId: string
+      url: string
+      caption: string | null
+      sortOrder: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["projectMedia"]>
+    composites: {}
+  }
+
+  type ProjectMediaGetPayload<S extends boolean | null | undefined | ProjectMediaDefaultArgs> = $Result.GetResult<Prisma.$ProjectMediaPayload, S>
+
+  type ProjectMediaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProjectMediaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProjectMediaCountAggregateInputType | true
+    }
+
+  export interface ProjectMediaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProjectMedia'], meta: { name: 'ProjectMedia' } }
+    /**
+     * Find zero or one ProjectMedia that matches the filter.
+     * @param {ProjectMediaFindUniqueArgs} args - Arguments to find a ProjectMedia
+     * @example
+     * // Get one ProjectMedia
+     * const projectMedia = await prisma.projectMedia.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProjectMediaFindUniqueArgs>(args: SelectSubset<T, ProjectMediaFindUniqueArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProjectMedia that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProjectMediaFindUniqueOrThrowArgs} args - Arguments to find a ProjectMedia
+     * @example
+     * // Get one ProjectMedia
+     * const projectMedia = await prisma.projectMedia.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProjectMediaFindUniqueOrThrowArgs>(args: SelectSubset<T, ProjectMediaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProjectMedia that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectMediaFindFirstArgs} args - Arguments to find a ProjectMedia
+     * @example
+     * // Get one ProjectMedia
+     * const projectMedia = await prisma.projectMedia.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProjectMediaFindFirstArgs>(args?: SelectSubset<T, ProjectMediaFindFirstArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProjectMedia that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectMediaFindFirstOrThrowArgs} args - Arguments to find a ProjectMedia
+     * @example
+     * // Get one ProjectMedia
+     * const projectMedia = await prisma.projectMedia.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProjectMediaFindFirstOrThrowArgs>(args?: SelectSubset<T, ProjectMediaFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProjectMedias that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectMediaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProjectMedias
+     * const projectMedias = await prisma.projectMedia.findMany()
+     * 
+     * // Get first 10 ProjectMedias
+     * const projectMedias = await prisma.projectMedia.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const projectMediaWithIdOnly = await prisma.projectMedia.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProjectMediaFindManyArgs>(args?: SelectSubset<T, ProjectMediaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProjectMedia.
+     * @param {ProjectMediaCreateArgs} args - Arguments to create a ProjectMedia.
+     * @example
+     * // Create one ProjectMedia
+     * const ProjectMedia = await prisma.projectMedia.create({
+     *   data: {
+     *     // ... data to create a ProjectMedia
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProjectMediaCreateArgs>(args: SelectSubset<T, ProjectMediaCreateArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProjectMedias.
+     * @param {ProjectMediaCreateManyArgs} args - Arguments to create many ProjectMedias.
+     * @example
+     * // Create many ProjectMedias
+     * const projectMedia = await prisma.projectMedia.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProjectMediaCreateManyArgs>(args?: SelectSubset<T, ProjectMediaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ProjectMedia.
+     * @param {ProjectMediaDeleteArgs} args - Arguments to delete one ProjectMedia.
+     * @example
+     * // Delete one ProjectMedia
+     * const ProjectMedia = await prisma.projectMedia.delete({
+     *   where: {
+     *     // ... filter to delete one ProjectMedia
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProjectMediaDeleteArgs>(args: SelectSubset<T, ProjectMediaDeleteArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProjectMedia.
+     * @param {ProjectMediaUpdateArgs} args - Arguments to update one ProjectMedia.
+     * @example
+     * // Update one ProjectMedia
+     * const projectMedia = await prisma.projectMedia.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProjectMediaUpdateArgs>(args: SelectSubset<T, ProjectMediaUpdateArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProjectMedias.
+     * @param {ProjectMediaDeleteManyArgs} args - Arguments to filter ProjectMedias to delete.
+     * @example
+     * // Delete a few ProjectMedias
+     * const { count } = await prisma.projectMedia.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProjectMediaDeleteManyArgs>(args?: SelectSubset<T, ProjectMediaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProjectMedias.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectMediaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProjectMedias
+     * const projectMedia = await prisma.projectMedia.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProjectMediaUpdateManyArgs>(args: SelectSubset<T, ProjectMediaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ProjectMedia.
+     * @param {ProjectMediaUpsertArgs} args - Arguments to update or create a ProjectMedia.
+     * @example
+     * // Update or create a ProjectMedia
+     * const projectMedia = await prisma.projectMedia.upsert({
+     *   create: {
+     *     // ... data to create a ProjectMedia
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProjectMedia we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProjectMediaUpsertArgs>(args: SelectSubset<T, ProjectMediaUpsertArgs<ExtArgs>>): Prisma__ProjectMediaClient<$Result.GetResult<Prisma.$ProjectMediaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProjectMedias.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectMediaCountArgs} args - Arguments to filter ProjectMedias to count.
+     * @example
+     * // Count the number of ProjectMedias
+     * const count = await prisma.projectMedia.count({
+     *   where: {
+     *     // ... the filter for the ProjectMedias we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProjectMediaCountArgs>(
+      args?: Subset<T, ProjectMediaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProjectMediaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProjectMedia.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectMediaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProjectMediaAggregateArgs>(args: Subset<T, ProjectMediaAggregateArgs>): Prisma.PrismaPromise<GetProjectMediaAggregateType<T>>
+
+    /**
+     * Group by ProjectMedia.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectMediaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProjectMediaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProjectMediaGroupByArgs['orderBy'] }
+        : { orderBy?: ProjectMediaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProjectMediaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjectMediaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProjectMedia model
+   */
+  readonly fields: ProjectMediaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProjectMedia.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProjectMediaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProjectMedia model
+   */
+  interface ProjectMediaFieldRefs {
+    readonly id: FieldRef<"ProjectMedia", 'String'>
+    readonly projectId: FieldRef<"ProjectMedia", 'String'>
+    readonly url: FieldRef<"ProjectMedia", 'String'>
+    readonly caption: FieldRef<"ProjectMedia", 'String'>
+    readonly sortOrder: FieldRef<"ProjectMedia", 'Int'>
+    readonly createdAt: FieldRef<"ProjectMedia", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProjectMedia", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProjectMedia findUnique
+   */
+  export type ProjectMediaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectMedia to fetch.
+     */
+    where: ProjectMediaWhereUniqueInput
+  }
+
+  /**
+   * ProjectMedia findUniqueOrThrow
+   */
+  export type ProjectMediaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectMedia to fetch.
+     */
+    where: ProjectMediaWhereUniqueInput
+  }
+
+  /**
+   * ProjectMedia findFirst
+   */
+  export type ProjectMediaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectMedia to fetch.
+     */
+    where?: ProjectMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectMedias to fetch.
+     */
+    orderBy?: ProjectMediaOrderByWithRelationInput | ProjectMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectMedias.
+     */
+    cursor?: ProjectMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectMedias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectMedias.
+     */
+    distinct?: ProjectMediaScalarFieldEnum | ProjectMediaScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectMedia findFirstOrThrow
+   */
+  export type ProjectMediaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectMedia to fetch.
+     */
+    where?: ProjectMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectMedias to fetch.
+     */
+    orderBy?: ProjectMediaOrderByWithRelationInput | ProjectMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectMedias.
+     */
+    cursor?: ProjectMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectMedias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectMedias.
+     */
+    distinct?: ProjectMediaScalarFieldEnum | ProjectMediaScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectMedia findMany
+   */
+  export type ProjectMediaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectMedias to fetch.
+     */
+    where?: ProjectMediaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectMedias to fetch.
+     */
+    orderBy?: ProjectMediaOrderByWithRelationInput | ProjectMediaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProjectMedias.
+     */
+    cursor?: ProjectMediaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectMedias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectMedias.
+     */
+    skip?: number
+    distinct?: ProjectMediaScalarFieldEnum | ProjectMediaScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectMedia create
+   */
+  export type ProjectMediaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProjectMedia.
+     */
+    data: XOR<ProjectMediaCreateInput, ProjectMediaUncheckedCreateInput>
+  }
+
+  /**
+   * ProjectMedia createMany
+   */
+  export type ProjectMediaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProjectMedias.
+     */
+    data: ProjectMediaCreateManyInput | ProjectMediaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProjectMedia update
+   */
+  export type ProjectMediaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProjectMedia.
+     */
+    data: XOR<ProjectMediaUpdateInput, ProjectMediaUncheckedUpdateInput>
+    /**
+     * Choose, which ProjectMedia to update.
+     */
+    where: ProjectMediaWhereUniqueInput
+  }
+
+  /**
+   * ProjectMedia updateMany
+   */
+  export type ProjectMediaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProjectMedias.
+     */
+    data: XOR<ProjectMediaUpdateManyMutationInput, ProjectMediaUncheckedUpdateManyInput>
+    /**
+     * Filter which ProjectMedias to update
+     */
+    where?: ProjectMediaWhereInput
+    /**
+     * Limit how many ProjectMedias to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectMedia upsert
+   */
+  export type ProjectMediaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProjectMedia to update in case it exists.
+     */
+    where: ProjectMediaWhereUniqueInput
+    /**
+     * In case the ProjectMedia found by the `where` argument doesn't exist, create a new ProjectMedia with this data.
+     */
+    create: XOR<ProjectMediaCreateInput, ProjectMediaUncheckedCreateInput>
+    /**
+     * In case the ProjectMedia was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProjectMediaUpdateInput, ProjectMediaUncheckedUpdateInput>
+  }
+
+  /**
+   * ProjectMedia delete
+   */
+  export type ProjectMediaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
+    /**
+     * Filter which ProjectMedia to delete.
+     */
+    where: ProjectMediaWhereUniqueInput
+  }
+
+  /**
+   * ProjectMedia deleteMany
+   */
+  export type ProjectMediaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectMedias to delete
+     */
+    where?: ProjectMediaWhereInput
+    /**
+     * Limit how many ProjectMedias to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectMedia without action
+   */
+  export type ProjectMediaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectMedia
+     */
+    select?: ProjectMediaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectMedia
+     */
+    omit?: ProjectMediaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectMediaInclude<ExtArgs> | null
   }
 
 
@@ -9716,1050 +9639,6 @@ export namespace Prisma {
      * Omit specific fields from the PollingStation
      */
     omit?: PollingStationOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model BursaryApplication
-   */
-
-  export type AggregateBursaryApplication = {
-    _count: BursaryApplicationCountAggregateOutputType | null
-    _avg: BursaryApplicationAvgAggregateOutputType | null
-    _sum: BursaryApplicationSumAggregateOutputType | null
-    _min: BursaryApplicationMinAggregateOutputType | null
-    _max: BursaryApplicationMaxAggregateOutputType | null
-  }
-
-  export type BursaryApplicationAvgAggregateOutputType = {
-    amount: number | null
-  }
-
-  export type BursaryApplicationSumAggregateOutputType = {
-    amount: number | null
-  }
-
-  export type BursaryApplicationMinAggregateOutputType = {
-    id: string | null
-    voterId: string | null
-    userId: string | null
-    studentName: string | null
-    idNumber: string | null
-    schoolName: string | null
-    gradeLevel: string | null
-    status: string | null
-    amount: number | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type BursaryApplicationMaxAggregateOutputType = {
-    id: string | null
-    voterId: string | null
-    userId: string | null
-    studentName: string | null
-    idNumber: string | null
-    schoolName: string | null
-    gradeLevel: string | null
-    status: string | null
-    amount: number | null
-    notes: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type BursaryApplicationCountAggregateOutputType = {
-    id: number
-    voterId: number
-    userId: number
-    studentName: number
-    idNumber: number
-    schoolName: number
-    gradeLevel: number
-    status: number
-    amount: number
-    notes: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type BursaryApplicationAvgAggregateInputType = {
-    amount?: true
-  }
-
-  export type BursaryApplicationSumAggregateInputType = {
-    amount?: true
-  }
-
-  export type BursaryApplicationMinAggregateInputType = {
-    id?: true
-    voterId?: true
-    userId?: true
-    studentName?: true
-    idNumber?: true
-    schoolName?: true
-    gradeLevel?: true
-    status?: true
-    amount?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type BursaryApplicationMaxAggregateInputType = {
-    id?: true
-    voterId?: true
-    userId?: true
-    studentName?: true
-    idNumber?: true
-    schoolName?: true
-    gradeLevel?: true
-    status?: true
-    amount?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type BursaryApplicationCountAggregateInputType = {
-    id?: true
-    voterId?: true
-    userId?: true
-    studentName?: true
-    idNumber?: true
-    schoolName?: true
-    gradeLevel?: true
-    status?: true
-    amount?: true
-    notes?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type BursaryApplicationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BursaryApplication to aggregate.
-     */
-    where?: BursaryApplicationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BursaryApplications to fetch.
-     */
-    orderBy?: BursaryApplicationOrderByWithRelationInput | BursaryApplicationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BursaryApplicationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BursaryApplications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BursaryApplications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned BursaryApplications
-    **/
-    _count?: true | BursaryApplicationCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: BursaryApplicationAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BursaryApplicationSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BursaryApplicationMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BursaryApplicationMaxAggregateInputType
-  }
-
-  export type GetBursaryApplicationAggregateType<T extends BursaryApplicationAggregateArgs> = {
-        [P in keyof T & keyof AggregateBursaryApplication]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBursaryApplication[P]>
-      : GetScalarType<T[P], AggregateBursaryApplication[P]>
-  }
-
-
-
-
-  export type BursaryApplicationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BursaryApplicationWhereInput
-    orderBy?: BursaryApplicationOrderByWithAggregationInput | BursaryApplicationOrderByWithAggregationInput[]
-    by: BursaryApplicationScalarFieldEnum[] | BursaryApplicationScalarFieldEnum
-    having?: BursaryApplicationScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BursaryApplicationCountAggregateInputType | true
-    _avg?: BursaryApplicationAvgAggregateInputType
-    _sum?: BursaryApplicationSumAggregateInputType
-    _min?: BursaryApplicationMinAggregateInputType
-    _max?: BursaryApplicationMaxAggregateInputType
-  }
-
-  export type BursaryApplicationGroupByOutputType = {
-    id: string
-    voterId: string
-    userId: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status: string
-    amount: number | null
-    notes: string | null
-    createdAt: Date
-    updatedAt: Date
-    _count: BursaryApplicationCountAggregateOutputType | null
-    _avg: BursaryApplicationAvgAggregateOutputType | null
-    _sum: BursaryApplicationSumAggregateOutputType | null
-    _min: BursaryApplicationMinAggregateOutputType | null
-    _max: BursaryApplicationMaxAggregateOutputType | null
-  }
-
-  type GetBursaryApplicationGroupByPayload<T extends BursaryApplicationGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BursaryApplicationGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BursaryApplicationGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BursaryApplicationGroupByOutputType[P]>
-            : GetScalarType<T[P], BursaryApplicationGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BursaryApplicationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    voterId?: boolean
-    userId?: boolean
-    studentName?: boolean
-    idNumber?: boolean
-    schoolName?: boolean
-    gradeLevel?: boolean
-    status?: boolean
-    amount?: boolean
-    notes?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    voter?: boolean | VoterDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["bursaryApplication"]>
-
-
-
-  export type BursaryApplicationSelectScalar = {
-    id?: boolean
-    voterId?: boolean
-    userId?: boolean
-    studentName?: boolean
-    idNumber?: boolean
-    schoolName?: boolean
-    gradeLevel?: boolean
-    status?: boolean
-    amount?: boolean
-    notes?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type BursaryApplicationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "voterId" | "userId" | "studentName" | "idNumber" | "schoolName" | "gradeLevel" | "status" | "amount" | "notes" | "createdAt" | "updatedAt", ExtArgs["result"]["bursaryApplication"]>
-  export type BursaryApplicationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    voter?: boolean | VoterDefaultArgs<ExtArgs>
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $BursaryApplicationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "BursaryApplication"
-    objects: {
-      voter: Prisma.$VoterPayload<ExtArgs>
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      voterId: string
-      userId: string
-      studentName: string
-      idNumber: string
-      schoolName: string
-      gradeLevel: string
-      status: string
-      amount: number | null
-      notes: string | null
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["bursaryApplication"]>
-    composites: {}
-  }
-
-  type BursaryApplicationGetPayload<S extends boolean | null | undefined | BursaryApplicationDefaultArgs> = $Result.GetResult<Prisma.$BursaryApplicationPayload, S>
-
-  type BursaryApplicationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BursaryApplicationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BursaryApplicationCountAggregateInputType | true
-    }
-
-  export interface BursaryApplicationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BursaryApplication'], meta: { name: 'BursaryApplication' } }
-    /**
-     * Find zero or one BursaryApplication that matches the filter.
-     * @param {BursaryApplicationFindUniqueArgs} args - Arguments to find a BursaryApplication
-     * @example
-     * // Get one BursaryApplication
-     * const bursaryApplication = await prisma.bursaryApplication.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BursaryApplicationFindUniqueArgs>(args: SelectSubset<T, BursaryApplicationFindUniqueArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one BursaryApplication that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BursaryApplicationFindUniqueOrThrowArgs} args - Arguments to find a BursaryApplication
-     * @example
-     * // Get one BursaryApplication
-     * const bursaryApplication = await prisma.bursaryApplication.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BursaryApplicationFindUniqueOrThrowArgs>(args: SelectSubset<T, BursaryApplicationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BursaryApplication that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BursaryApplicationFindFirstArgs} args - Arguments to find a BursaryApplication
-     * @example
-     * // Get one BursaryApplication
-     * const bursaryApplication = await prisma.bursaryApplication.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BursaryApplicationFindFirstArgs>(args?: SelectSubset<T, BursaryApplicationFindFirstArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BursaryApplication that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BursaryApplicationFindFirstOrThrowArgs} args - Arguments to find a BursaryApplication
-     * @example
-     * // Get one BursaryApplication
-     * const bursaryApplication = await prisma.bursaryApplication.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BursaryApplicationFindFirstOrThrowArgs>(args?: SelectSubset<T, BursaryApplicationFindFirstOrThrowArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more BursaryApplications that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BursaryApplicationFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all BursaryApplications
-     * const bursaryApplications = await prisma.bursaryApplication.findMany()
-     * 
-     * // Get first 10 BursaryApplications
-     * const bursaryApplications = await prisma.bursaryApplication.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const bursaryApplicationWithIdOnly = await prisma.bursaryApplication.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BursaryApplicationFindManyArgs>(args?: SelectSubset<T, BursaryApplicationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a BursaryApplication.
-     * @param {BursaryApplicationCreateArgs} args - Arguments to create a BursaryApplication.
-     * @example
-     * // Create one BursaryApplication
-     * const BursaryApplication = await prisma.bursaryApplication.create({
-     *   data: {
-     *     // ... data to create a BursaryApplication
-     *   }
-     * })
-     * 
-     */
-    create<T extends BursaryApplicationCreateArgs>(args: SelectSubset<T, BursaryApplicationCreateArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many BursaryApplications.
-     * @param {BursaryApplicationCreateManyArgs} args - Arguments to create many BursaryApplications.
-     * @example
-     * // Create many BursaryApplications
-     * const bursaryApplication = await prisma.bursaryApplication.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BursaryApplicationCreateManyArgs>(args?: SelectSubset<T, BursaryApplicationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a BursaryApplication.
-     * @param {BursaryApplicationDeleteArgs} args - Arguments to delete one BursaryApplication.
-     * @example
-     * // Delete one BursaryApplication
-     * const BursaryApplication = await prisma.bursaryApplication.delete({
-     *   where: {
-     *     // ... filter to delete one BursaryApplication
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BursaryApplicationDeleteArgs>(args: SelectSubset<T, BursaryApplicationDeleteArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one BursaryApplication.
-     * @param {BursaryApplicationUpdateArgs} args - Arguments to update one BursaryApplication.
-     * @example
-     * // Update one BursaryApplication
-     * const bursaryApplication = await prisma.bursaryApplication.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BursaryApplicationUpdateArgs>(args: SelectSubset<T, BursaryApplicationUpdateArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more BursaryApplications.
-     * @param {BursaryApplicationDeleteManyArgs} args - Arguments to filter BursaryApplications to delete.
-     * @example
-     * // Delete a few BursaryApplications
-     * const { count } = await prisma.bursaryApplication.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BursaryApplicationDeleteManyArgs>(args?: SelectSubset<T, BursaryApplicationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BursaryApplications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BursaryApplicationUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many BursaryApplications
-     * const bursaryApplication = await prisma.bursaryApplication.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BursaryApplicationUpdateManyArgs>(args: SelectSubset<T, BursaryApplicationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one BursaryApplication.
-     * @param {BursaryApplicationUpsertArgs} args - Arguments to update or create a BursaryApplication.
-     * @example
-     * // Update or create a BursaryApplication
-     * const bursaryApplication = await prisma.bursaryApplication.upsert({
-     *   create: {
-     *     // ... data to create a BursaryApplication
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the BursaryApplication we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BursaryApplicationUpsertArgs>(args: SelectSubset<T, BursaryApplicationUpsertArgs<ExtArgs>>): Prisma__BursaryApplicationClient<$Result.GetResult<Prisma.$BursaryApplicationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of BursaryApplications.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BursaryApplicationCountArgs} args - Arguments to filter BursaryApplications to count.
-     * @example
-     * // Count the number of BursaryApplications
-     * const count = await prisma.bursaryApplication.count({
-     *   where: {
-     *     // ... the filter for the BursaryApplications we want to count
-     *   }
-     * })
-    **/
-    count<T extends BursaryApplicationCountArgs>(
-      args?: Subset<T, BursaryApplicationCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BursaryApplicationCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a BursaryApplication.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BursaryApplicationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BursaryApplicationAggregateArgs>(args: Subset<T, BursaryApplicationAggregateArgs>): Prisma.PrismaPromise<GetBursaryApplicationAggregateType<T>>
-
-    /**
-     * Group by BursaryApplication.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BursaryApplicationGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BursaryApplicationGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BursaryApplicationGroupByArgs['orderBy'] }
-        : { orderBy?: BursaryApplicationGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BursaryApplicationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBursaryApplicationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the BursaryApplication model
-   */
-  readonly fields: BursaryApplicationFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for BursaryApplication.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BursaryApplicationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    voter<T extends VoterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, VoterDefaultArgs<ExtArgs>>): Prisma__VoterClient<$Result.GetResult<Prisma.$VoterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the BursaryApplication model
-   */
-  interface BursaryApplicationFieldRefs {
-    readonly id: FieldRef<"BursaryApplication", 'String'>
-    readonly voterId: FieldRef<"BursaryApplication", 'String'>
-    readonly userId: FieldRef<"BursaryApplication", 'String'>
-    readonly studentName: FieldRef<"BursaryApplication", 'String'>
-    readonly idNumber: FieldRef<"BursaryApplication", 'String'>
-    readonly schoolName: FieldRef<"BursaryApplication", 'String'>
-    readonly gradeLevel: FieldRef<"BursaryApplication", 'String'>
-    readonly status: FieldRef<"BursaryApplication", 'String'>
-    readonly amount: FieldRef<"BursaryApplication", 'Float'>
-    readonly notes: FieldRef<"BursaryApplication", 'String'>
-    readonly createdAt: FieldRef<"BursaryApplication", 'DateTime'>
-    readonly updatedAt: FieldRef<"BursaryApplication", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * BursaryApplication findUnique
-   */
-  export type BursaryApplicationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * Filter, which BursaryApplication to fetch.
-     */
-    where: BursaryApplicationWhereUniqueInput
-  }
-
-  /**
-   * BursaryApplication findUniqueOrThrow
-   */
-  export type BursaryApplicationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * Filter, which BursaryApplication to fetch.
-     */
-    where: BursaryApplicationWhereUniqueInput
-  }
-
-  /**
-   * BursaryApplication findFirst
-   */
-  export type BursaryApplicationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * Filter, which BursaryApplication to fetch.
-     */
-    where?: BursaryApplicationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BursaryApplications to fetch.
-     */
-    orderBy?: BursaryApplicationOrderByWithRelationInput | BursaryApplicationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BursaryApplications.
-     */
-    cursor?: BursaryApplicationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BursaryApplications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BursaryApplications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BursaryApplications.
-     */
-    distinct?: BursaryApplicationScalarFieldEnum | BursaryApplicationScalarFieldEnum[]
-  }
-
-  /**
-   * BursaryApplication findFirstOrThrow
-   */
-  export type BursaryApplicationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * Filter, which BursaryApplication to fetch.
-     */
-    where?: BursaryApplicationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BursaryApplications to fetch.
-     */
-    orderBy?: BursaryApplicationOrderByWithRelationInput | BursaryApplicationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BursaryApplications.
-     */
-    cursor?: BursaryApplicationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BursaryApplications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BursaryApplications.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BursaryApplications.
-     */
-    distinct?: BursaryApplicationScalarFieldEnum | BursaryApplicationScalarFieldEnum[]
-  }
-
-  /**
-   * BursaryApplication findMany
-   */
-  export type BursaryApplicationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * Filter, which BursaryApplications to fetch.
-     */
-    where?: BursaryApplicationWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BursaryApplications to fetch.
-     */
-    orderBy?: BursaryApplicationOrderByWithRelationInput | BursaryApplicationOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing BursaryApplications.
-     */
-    cursor?: BursaryApplicationWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BursaryApplications from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BursaryApplications.
-     */
-    skip?: number
-    distinct?: BursaryApplicationScalarFieldEnum | BursaryApplicationScalarFieldEnum[]
-  }
-
-  /**
-   * BursaryApplication create
-   */
-  export type BursaryApplicationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * The data needed to create a BursaryApplication.
-     */
-    data: XOR<BursaryApplicationCreateInput, BursaryApplicationUncheckedCreateInput>
-  }
-
-  /**
-   * BursaryApplication createMany
-   */
-  export type BursaryApplicationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many BursaryApplications.
-     */
-    data: BursaryApplicationCreateManyInput | BursaryApplicationCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * BursaryApplication update
-   */
-  export type BursaryApplicationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * The data needed to update a BursaryApplication.
-     */
-    data: XOR<BursaryApplicationUpdateInput, BursaryApplicationUncheckedUpdateInput>
-    /**
-     * Choose, which BursaryApplication to update.
-     */
-    where: BursaryApplicationWhereUniqueInput
-  }
-
-  /**
-   * BursaryApplication updateMany
-   */
-  export type BursaryApplicationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update BursaryApplications.
-     */
-    data: XOR<BursaryApplicationUpdateManyMutationInput, BursaryApplicationUncheckedUpdateManyInput>
-    /**
-     * Filter which BursaryApplications to update
-     */
-    where?: BursaryApplicationWhereInput
-    /**
-     * Limit how many BursaryApplications to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * BursaryApplication upsert
-   */
-  export type BursaryApplicationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * The filter to search for the BursaryApplication to update in case it exists.
-     */
-    where: BursaryApplicationWhereUniqueInput
-    /**
-     * In case the BursaryApplication found by the `where` argument doesn't exist, create a new BursaryApplication with this data.
-     */
-    create: XOR<BursaryApplicationCreateInput, BursaryApplicationUncheckedCreateInput>
-    /**
-     * In case the BursaryApplication was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BursaryApplicationUpdateInput, BursaryApplicationUncheckedUpdateInput>
-  }
-
-  /**
-   * BursaryApplication delete
-   */
-  export type BursaryApplicationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
-    /**
-     * Filter which BursaryApplication to delete.
-     */
-    where: BursaryApplicationWhereUniqueInput
-  }
-
-  /**
-   * BursaryApplication deleteMany
-   */
-  export type BursaryApplicationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BursaryApplications to delete
-     */
-    where?: BursaryApplicationWhereInput
-    /**
-     * Limit how many BursaryApplications to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * BursaryApplication without action
-   */
-  export type BursaryApplicationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BursaryApplication
-     */
-    select?: BursaryApplicationSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BursaryApplication
-     */
-    omit?: BursaryApplicationOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BursaryApplicationInclude<ExtArgs> | null
   }
 
 
@@ -13718,27 +12597,13 @@ export namespace Prisma {
   export type VerificationTokenScalarFieldEnum = (typeof VerificationTokenScalarFieldEnum)[keyof typeof VerificationTokenScalarFieldEnum]
 
 
-  export const VoterScalarFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    phone: 'phone',
-    name: 'name',
-    ward: 'ward',
-    status: 'status',
-    smsToken: 'smsToken',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type VoterScalarFieldEnum = (typeof VoterScalarFieldEnum)[keyof typeof VoterScalarFieldEnum]
-
-
   export const ProjectScalarFieldEnum: {
     id: 'id',
     title: 'title',
     description: 'description',
     category: 'category',
     image: 'image',
+    location: 'location',
     status: 'status',
     ward: 'ward',
     impact: 'impact',
@@ -13747,6 +12612,19 @@ export namespace Prisma {
   };
 
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+  export const ProjectMediaScalarFieldEnum: {
+    id: 'id',
+    projectId: 'projectId',
+    url: 'url',
+    caption: 'caption',
+    sortOrder: 'sortOrder',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProjectMediaScalarFieldEnum = (typeof ProjectMediaScalarFieldEnum)[keyof typeof ProjectMediaScalarFieldEnum]
 
 
   export const PollingStationScalarFieldEnum: {
@@ -13764,24 +12642,6 @@ export namespace Prisma {
   };
 
   export type PollingStationScalarFieldEnum = (typeof PollingStationScalarFieldEnum)[keyof typeof PollingStationScalarFieldEnum]
-
-
-  export const BursaryApplicationScalarFieldEnum: {
-    id: 'id',
-    voterId: 'voterId',
-    userId: 'userId',
-    studentName: 'studentName',
-    idNumber: 'idNumber',
-    schoolName: 'schoolName',
-    gradeLevel: 'gradeLevel',
-    status: 'status',
-    amount: 'amount',
-    notes: 'notes',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type BursaryApplicationScalarFieldEnum = (typeof BursaryApplicationScalarFieldEnum)[keyof typeof BursaryApplicationScalarFieldEnum]
 
 
   export const BursaryDistributionScalarFieldEnum: {
@@ -13916,31 +12776,29 @@ export namespace Prisma {
   export type VerificationTokenOrderByRelevanceFieldEnum = (typeof VerificationTokenOrderByRelevanceFieldEnum)[keyof typeof VerificationTokenOrderByRelevanceFieldEnum]
 
 
-  export const VoterOrderByRelevanceFieldEnum: {
-    id: 'id',
-    userId: 'userId',
-    phone: 'phone',
-    name: 'name',
-    ward: 'ward',
-    status: 'status',
-    smsToken: 'smsToken'
-  };
-
-  export type VoterOrderByRelevanceFieldEnum = (typeof VoterOrderByRelevanceFieldEnum)[keyof typeof VoterOrderByRelevanceFieldEnum]
-
-
   export const ProjectOrderByRelevanceFieldEnum: {
     id: 'id',
     title: 'title',
     description: 'description',
     category: 'category',
     image: 'image',
+    location: 'location',
     status: 'status',
     ward: 'ward',
     impact: 'impact'
   };
 
   export type ProjectOrderByRelevanceFieldEnum = (typeof ProjectOrderByRelevanceFieldEnum)[keyof typeof ProjectOrderByRelevanceFieldEnum]
+
+
+  export const ProjectMediaOrderByRelevanceFieldEnum: {
+    id: 'id',
+    projectId: 'projectId',
+    url: 'url',
+    caption: 'caption'
+  };
+
+  export type ProjectMediaOrderByRelevanceFieldEnum = (typeof ProjectMediaOrderByRelevanceFieldEnum)[keyof typeof ProjectMediaOrderByRelevanceFieldEnum]
 
 
   export const PollingStationOrderByRelevanceFieldEnum: {
@@ -13953,21 +12811,6 @@ export namespace Prisma {
   };
 
   export type PollingStationOrderByRelevanceFieldEnum = (typeof PollingStationOrderByRelevanceFieldEnum)[keyof typeof PollingStationOrderByRelevanceFieldEnum]
-
-
-  export const BursaryApplicationOrderByRelevanceFieldEnum: {
-    id: 'id',
-    voterId: 'voterId',
-    userId: 'userId',
-    studentName: 'studentName',
-    idNumber: 'idNumber',
-    schoolName: 'schoolName',
-    gradeLevel: 'gradeLevel',
-    status: 'status',
-    notes: 'notes'
-  };
-
-  export type BursaryApplicationOrderByRelevanceFieldEnum = (typeof BursaryApplicationOrderByRelevanceFieldEnum)[keyof typeof BursaryApplicationOrderByRelevanceFieldEnum]
 
 
   export const BursaryDistributionOrderByRelevanceFieldEnum: {
@@ -14310,8 +13153,6 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     posts?: PostListRelationFilter
-    voters?: XOR<VoterNullableScalarRelationFilter, VoterWhereInput> | null
-    bursaryApps?: BursaryApplicationListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -14329,8 +13170,6 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     posts?: PostOrderByRelationAggregateInput
-    voters?: VoterOrderByWithRelationInput
-    bursaryApps?: BursaryApplicationOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -14352,8 +13191,6 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     posts?: PostListRelationFilter
-    voters?: XOR<VoterNullableScalarRelationFilter, VoterWhereInput> | null
-    bursaryApps?: BursaryApplicationListRelationFilter
   }, "id" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -14439,85 +13276,6 @@ export namespace Prisma {
     expires?: DateTimeWithAggregatesFilter<"VerificationToken"> | Date | string
   }
 
-  export type VoterWhereInput = {
-    AND?: VoterWhereInput | VoterWhereInput[]
-    OR?: VoterWhereInput[]
-    NOT?: VoterWhereInput | VoterWhereInput[]
-    id?: StringFilter<"Voter"> | string
-    userId?: StringFilter<"Voter"> | string
-    phone?: StringFilter<"Voter"> | string
-    name?: StringFilter<"Voter"> | string
-    ward?: StringFilter<"Voter"> | string
-    status?: StringFilter<"Voter"> | string
-    smsToken?: StringFilter<"Voter"> | string
-    createdAt?: DateTimeFilter<"Voter"> | Date | string
-    updatedAt?: DateTimeFilter<"Voter"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    bursaryApplications?: BursaryApplicationListRelationFilter
-  }
-
-  export type VoterOrderByWithRelationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    phone?: SortOrder
-    name?: SortOrder
-    ward?: SortOrder
-    status?: SortOrder
-    smsToken?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-    bursaryApplications?: BursaryApplicationOrderByRelationAggregateInput
-    _relevance?: VoterOrderByRelevanceInput
-  }
-
-  export type VoterWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    userId?: string
-    phone?: string
-    smsToken?: string
-    AND?: VoterWhereInput | VoterWhereInput[]
-    OR?: VoterWhereInput[]
-    NOT?: VoterWhereInput | VoterWhereInput[]
-    name?: StringFilter<"Voter"> | string
-    ward?: StringFilter<"Voter"> | string
-    status?: StringFilter<"Voter"> | string
-    createdAt?: DateTimeFilter<"Voter"> | Date | string
-    updatedAt?: DateTimeFilter<"Voter"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-    bursaryApplications?: BursaryApplicationListRelationFilter
-  }, "id" | "userId" | "phone" | "smsToken">
-
-  export type VoterOrderByWithAggregationInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    phone?: SortOrder
-    name?: SortOrder
-    ward?: SortOrder
-    status?: SortOrder
-    smsToken?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: VoterCountOrderByAggregateInput
-    _max?: VoterMaxOrderByAggregateInput
-    _min?: VoterMinOrderByAggregateInput
-  }
-
-  export type VoterScalarWhereWithAggregatesInput = {
-    AND?: VoterScalarWhereWithAggregatesInput | VoterScalarWhereWithAggregatesInput[]
-    OR?: VoterScalarWhereWithAggregatesInput[]
-    NOT?: VoterScalarWhereWithAggregatesInput | VoterScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Voter"> | string
-    userId?: StringWithAggregatesFilter<"Voter"> | string
-    phone?: StringWithAggregatesFilter<"Voter"> | string
-    name?: StringWithAggregatesFilter<"Voter"> | string
-    ward?: StringWithAggregatesFilter<"Voter"> | string
-    status?: StringWithAggregatesFilter<"Voter"> | string
-    smsToken?: StringWithAggregatesFilter<"Voter"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Voter"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Voter"> | Date | string
-  }
-
   export type ProjectWhereInput = {
     AND?: ProjectWhereInput | ProjectWhereInput[]
     OR?: ProjectWhereInput[]
@@ -14527,11 +13285,13 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     category?: StringFilter<"Project"> | string
     image?: StringNullableFilter<"Project"> | string | null
+    location?: StringNullableFilter<"Project"> | string | null
     status?: StringFilter<"Project"> | string
     ward?: StringNullableFilter<"Project"> | string | null
     impact?: StringNullableFilter<"Project"> | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
+    media?: ProjectMediaListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -14540,11 +13300,13 @@ export namespace Prisma {
     description?: SortOrder
     category?: SortOrder
     image?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     status?: SortOrder
     ward?: SortOrderInput | SortOrder
     impact?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    media?: ProjectMediaOrderByRelationAggregateInput
     _relevance?: ProjectOrderByRelevanceInput
   }
 
@@ -14557,11 +13319,13 @@ export namespace Prisma {
     description?: StringFilter<"Project"> | string
     category?: StringFilter<"Project"> | string
     image?: StringNullableFilter<"Project"> | string | null
+    location?: StringNullableFilter<"Project"> | string | null
     status?: StringFilter<"Project"> | string
     ward?: StringNullableFilter<"Project"> | string | null
     impact?: StringNullableFilter<"Project"> | string | null
     createdAt?: DateTimeFilter<"Project"> | Date | string
     updatedAt?: DateTimeFilter<"Project"> | Date | string
+    media?: ProjectMediaListRelationFilter
   }, "id">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -14570,6 +13334,7 @@ export namespace Prisma {
     description?: SortOrder
     category?: SortOrder
     image?: SortOrderInput | SortOrder
+    location?: SortOrderInput | SortOrder
     status?: SortOrder
     ward?: SortOrderInput | SortOrder
     impact?: SortOrderInput | SortOrder
@@ -14589,11 +13354,80 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Project"> | string
     category?: StringWithAggregatesFilter<"Project"> | string
     image?: StringNullableWithAggregatesFilter<"Project"> | string | null
+    location?: StringNullableWithAggregatesFilter<"Project"> | string | null
     status?: StringWithAggregatesFilter<"Project"> | string
     ward?: StringNullableWithAggregatesFilter<"Project"> | string | null
     impact?: StringNullableWithAggregatesFilter<"Project"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
+  }
+
+  export type ProjectMediaWhereInput = {
+    AND?: ProjectMediaWhereInput | ProjectMediaWhereInput[]
+    OR?: ProjectMediaWhereInput[]
+    NOT?: ProjectMediaWhereInput | ProjectMediaWhereInput[]
+    id?: StringFilter<"ProjectMedia"> | string
+    projectId?: StringFilter<"ProjectMedia"> | string
+    url?: StringFilter<"ProjectMedia"> | string
+    caption?: StringNullableFilter<"ProjectMedia"> | string | null
+    sortOrder?: IntFilter<"ProjectMedia"> | number
+    createdAt?: DateTimeFilter<"ProjectMedia"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectMedia"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+  }
+
+  export type ProjectMediaOrderByWithRelationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    url?: SortOrder
+    caption?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    project?: ProjectOrderByWithRelationInput
+    _relevance?: ProjectMediaOrderByRelevanceInput
+  }
+
+  export type ProjectMediaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ProjectMediaWhereInput | ProjectMediaWhereInput[]
+    OR?: ProjectMediaWhereInput[]
+    NOT?: ProjectMediaWhereInput | ProjectMediaWhereInput[]
+    projectId?: StringFilter<"ProjectMedia"> | string
+    url?: StringFilter<"ProjectMedia"> | string
+    caption?: StringNullableFilter<"ProjectMedia"> | string | null
+    sortOrder?: IntFilter<"ProjectMedia"> | number
+    createdAt?: DateTimeFilter<"ProjectMedia"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectMedia"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+  }, "id">
+
+  export type ProjectMediaOrderByWithAggregationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    url?: SortOrder
+    caption?: SortOrderInput | SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProjectMediaCountOrderByAggregateInput
+    _avg?: ProjectMediaAvgOrderByAggregateInput
+    _max?: ProjectMediaMaxOrderByAggregateInput
+    _min?: ProjectMediaMinOrderByAggregateInput
+    _sum?: ProjectMediaSumOrderByAggregateInput
+  }
+
+  export type ProjectMediaScalarWhereWithAggregatesInput = {
+    AND?: ProjectMediaScalarWhereWithAggregatesInput | ProjectMediaScalarWhereWithAggregatesInput[]
+    OR?: ProjectMediaScalarWhereWithAggregatesInput[]
+    NOT?: ProjectMediaScalarWhereWithAggregatesInput | ProjectMediaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProjectMedia"> | string
+    projectId?: StringWithAggregatesFilter<"ProjectMedia"> | string
+    url?: StringWithAggregatesFilter<"ProjectMedia"> | string
+    caption?: StringNullableWithAggregatesFilter<"ProjectMedia"> | string | null
+    sortOrder?: IntWithAggregatesFilter<"ProjectMedia"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"ProjectMedia"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProjectMedia"> | Date | string
   }
 
   export type PollingStationWhereInput = {
@@ -14679,102 +13513,6 @@ export namespace Prisma {
     status?: StringWithAggregatesFilter<"PollingStation"> | string
     createdAt?: DateTimeWithAggregatesFilter<"PollingStation"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PollingStation"> | Date | string
-  }
-
-  export type BursaryApplicationWhereInput = {
-    AND?: BursaryApplicationWhereInput | BursaryApplicationWhereInput[]
-    OR?: BursaryApplicationWhereInput[]
-    NOT?: BursaryApplicationWhereInput | BursaryApplicationWhereInput[]
-    id?: StringFilter<"BursaryApplication"> | string
-    voterId?: StringFilter<"BursaryApplication"> | string
-    userId?: StringFilter<"BursaryApplication"> | string
-    studentName?: StringFilter<"BursaryApplication"> | string
-    idNumber?: StringFilter<"BursaryApplication"> | string
-    schoolName?: StringFilter<"BursaryApplication"> | string
-    gradeLevel?: StringFilter<"BursaryApplication"> | string
-    status?: StringFilter<"BursaryApplication"> | string
-    amount?: FloatNullableFilter<"BursaryApplication"> | number | null
-    notes?: StringNullableFilter<"BursaryApplication"> | string | null
-    createdAt?: DateTimeFilter<"BursaryApplication"> | Date | string
-    updatedAt?: DateTimeFilter<"BursaryApplication"> | Date | string
-    voter?: XOR<VoterScalarRelationFilter, VoterWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type BursaryApplicationOrderByWithRelationInput = {
-    id?: SortOrder
-    voterId?: SortOrder
-    userId?: SortOrder
-    studentName?: SortOrder
-    idNumber?: SortOrder
-    schoolName?: SortOrder
-    gradeLevel?: SortOrder
-    status?: SortOrder
-    amount?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    voter?: VoterOrderByWithRelationInput
-    user?: UserOrderByWithRelationInput
-    _relevance?: BursaryApplicationOrderByRelevanceInput
-  }
-
-  export type BursaryApplicationWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    idNumber?: string
-    AND?: BursaryApplicationWhereInput | BursaryApplicationWhereInput[]
-    OR?: BursaryApplicationWhereInput[]
-    NOT?: BursaryApplicationWhereInput | BursaryApplicationWhereInput[]
-    voterId?: StringFilter<"BursaryApplication"> | string
-    userId?: StringFilter<"BursaryApplication"> | string
-    studentName?: StringFilter<"BursaryApplication"> | string
-    schoolName?: StringFilter<"BursaryApplication"> | string
-    gradeLevel?: StringFilter<"BursaryApplication"> | string
-    status?: StringFilter<"BursaryApplication"> | string
-    amount?: FloatNullableFilter<"BursaryApplication"> | number | null
-    notes?: StringNullableFilter<"BursaryApplication"> | string | null
-    createdAt?: DateTimeFilter<"BursaryApplication"> | Date | string
-    updatedAt?: DateTimeFilter<"BursaryApplication"> | Date | string
-    voter?: XOR<VoterScalarRelationFilter, VoterWhereInput>
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "idNumber">
-
-  export type BursaryApplicationOrderByWithAggregationInput = {
-    id?: SortOrder
-    voterId?: SortOrder
-    userId?: SortOrder
-    studentName?: SortOrder
-    idNumber?: SortOrder
-    schoolName?: SortOrder
-    gradeLevel?: SortOrder
-    status?: SortOrder
-    amount?: SortOrderInput | SortOrder
-    notes?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: BursaryApplicationCountOrderByAggregateInput
-    _avg?: BursaryApplicationAvgOrderByAggregateInput
-    _max?: BursaryApplicationMaxOrderByAggregateInput
-    _min?: BursaryApplicationMinOrderByAggregateInput
-    _sum?: BursaryApplicationSumOrderByAggregateInput
-  }
-
-  export type BursaryApplicationScalarWhereWithAggregatesInput = {
-    AND?: BursaryApplicationScalarWhereWithAggregatesInput | BursaryApplicationScalarWhereWithAggregatesInput[]
-    OR?: BursaryApplicationScalarWhereWithAggregatesInput[]
-    NOT?: BursaryApplicationScalarWhereWithAggregatesInput | BursaryApplicationScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    voterId?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    userId?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    studentName?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    idNumber?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    schoolName?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    gradeLevel?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    status?: StringWithAggregatesFilter<"BursaryApplication"> | string
-    amount?: FloatNullableWithAggregatesFilter<"BursaryApplication"> | number | null
-    notes?: StringNullableWithAggregatesFilter<"BursaryApplication"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"BursaryApplication"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"BursaryApplication"> | Date | string
   }
 
   export type BursaryDistributionWhereInput = {
@@ -15254,8 +13992,6 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
-    voters?: VoterCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -15273,8 +14009,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    voters?: VoterUncheckedCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -15292,8 +14026,6 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -15311,8 +14043,6 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUncheckedUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -15406,104 +14136,19 @@ export namespace Prisma {
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type VoterCreateInput = {
-    id?: string
-    phone: string
-    name: string
-    ward: string
-    status?: string
-    smsToken?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutVotersInput
-    bursaryApplications?: BursaryApplicationCreateNestedManyWithoutVoterInput
-  }
-
-  export type VoterUncheckedCreateInput = {
-    id?: string
-    userId: string
-    phone: string
-    name: string
-    ward: string
-    status?: string
-    smsToken?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    bursaryApplications?: BursaryApplicationUncheckedCreateNestedManyWithoutVoterInput
-  }
-
-  export type VoterUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutVotersNestedInput
-    bursaryApplications?: BursaryApplicationUpdateManyWithoutVoterNestedInput
-  }
-
-  export type VoterUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bursaryApplications?: BursaryApplicationUncheckedUpdateManyWithoutVoterNestedInput
-  }
-
-  export type VoterCreateManyInput = {
-    id?: string
-    userId: string
-    phone: string
-    name: string
-    ward: string
-    status?: string
-    smsToken?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VoterUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type VoterUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type ProjectCreateInput = {
     id?: string
     title: string
     description: string
     category: string
     image?: string | null
+    location?: string | null
     status?: string
     ward?: string | null
     impact?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    media?: ProjectMediaCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -15512,11 +14157,13 @@ export namespace Prisma {
     description: string
     category: string
     image?: string | null
+    location?: string | null
     status?: string
     ward?: string | null
     impact?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    media?: ProjectMediaUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -15525,11 +14172,13 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     ward?: NullableStringFieldUpdateOperationsInput | string | null
     impact?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProjectMediaUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -15538,11 +14187,13 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     ward?: NullableStringFieldUpdateOperationsInput | string | null
     impact?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    media?: ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -15551,6 +14202,7 @@ export namespace Prisma {
     description: string
     category: string
     image?: string | null
+    location?: string | null
     status?: string
     ward?: string | null
     impact?: string | null
@@ -15564,6 +14216,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     ward?: NullableStringFieldUpdateOperationsInput | string | null
     impact?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15577,9 +14230,79 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     category?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
     status?: StringFieldUpdateOperationsInput | string
     ward?: NullableStringFieldUpdateOperationsInput | string | null
     impact?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectMediaCreateInput = {
+    id?: string
+    url: string
+    caption?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutMediaInput
+  }
+
+  export type ProjectMediaUncheckedCreateInput = {
+    id?: string
+    projectId: string
+    url: string
+    caption?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectMediaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutMediaNestedInput
+  }
+
+  export type ProjectMediaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectMediaCreateManyInput = {
+    id?: string
+    projectId: string
+    url: string
+    caption?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectMediaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectMediaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15678,109 +14401,6 @@ export namespace Prisma {
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     voters?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BursaryApplicationCreateInput = {
-    id?: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    voter: VoterCreateNestedOneWithoutBursaryApplicationsInput
-    user: UserCreateNestedOneWithoutBursaryAppsInput
-  }
-
-  export type BursaryApplicationUncheckedCreateInput = {
-    id?: string
-    voterId: string
-    userId: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BursaryApplicationUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    voter?: VoterUpdateOneRequiredWithoutBursaryApplicationsNestedInput
-    user?: UserUpdateOneRequiredWithoutBursaryAppsNestedInput
-  }
-
-  export type BursaryApplicationUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    voterId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BursaryApplicationCreateManyInput = {
-    id?: string
-    voterId: string
-    userId: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BursaryApplicationUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BursaryApplicationUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    voterId?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16397,17 +15017,6 @@ export namespace Prisma {
     none?: PostWhereInput
   }
 
-  export type VoterNullableScalarRelationFilter = {
-    is?: VoterWhereInput | null
-    isNot?: VoterWhereInput | null
-  }
-
-  export type BursaryApplicationListRelationFilter = {
-    every?: BursaryApplicationWhereInput
-    some?: BursaryApplicationWhereInput
-    none?: BursaryApplicationWhereInput
-  }
-
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -16417,10 +15026,6 @@ export namespace Prisma {
   }
 
   export type PostOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type BursaryApplicationOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16518,46 +15123,14 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type VoterOrderByRelevanceInput = {
-    fields: VoterOrderByRelevanceFieldEnum | VoterOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
+  export type ProjectMediaListRelationFilter = {
+    every?: ProjectMediaWhereInput
+    some?: ProjectMediaWhereInput
+    none?: ProjectMediaWhereInput
   }
 
-  export type VoterCountOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    phone?: SortOrder
-    name?: SortOrder
-    ward?: SortOrder
-    status?: SortOrder
-    smsToken?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VoterMaxOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    phone?: SortOrder
-    name?: SortOrder
-    ward?: SortOrder
-    status?: SortOrder
-    smsToken?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type VoterMinOrderByAggregateInput = {
-    id?: SortOrder
-    userId?: SortOrder
-    phone?: SortOrder
-    name?: SortOrder
-    ward?: SortOrder
-    status?: SortOrder
-    smsToken?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
+  export type ProjectMediaOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProjectOrderByRelevanceInput = {
@@ -16572,6 +15145,7 @@ export namespace Prisma {
     description?: SortOrder
     category?: SortOrder
     image?: SortOrder
+    location?: SortOrder
     status?: SortOrder
     ward?: SortOrder
     impact?: SortOrder
@@ -16585,6 +15159,7 @@ export namespace Prisma {
     description?: SortOrder
     category?: SortOrder
     image?: SortOrder
+    location?: SortOrder
     status?: SortOrder
     ward?: SortOrder
     impact?: SortOrder
@@ -16598,11 +15173,61 @@ export namespace Prisma {
     description?: SortOrder
     category?: SortOrder
     image?: SortOrder
+    location?: SortOrder
     status?: SortOrder
     ward?: SortOrder
     impact?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type ProjectScalarRelationFilter = {
+    is?: ProjectWhereInput
+    isNot?: ProjectWhereInput
+  }
+
+  export type ProjectMediaOrderByRelevanceInput = {
+    fields: ProjectMediaOrderByRelevanceFieldEnum | ProjectMediaOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ProjectMediaCountOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    url?: SortOrder
+    caption?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectMediaAvgOrderByAggregateInput = {
+    sortOrder?: SortOrder
+  }
+
+  export type ProjectMediaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    url?: SortOrder
+    caption?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectMediaMinOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    url?: SortOrder
+    caption?: SortOrder
+    sortOrder?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProjectMediaSumOrderByAggregateInput = {
+    sortOrder?: SortOrder
   }
 
   export type FloatNullableFilter<$PrismaModel = never> = {
@@ -16690,70 +15315,6 @@ export namespace Prisma {
     _sum?: NestedFloatNullableFilter<$PrismaModel>
     _min?: NestedFloatNullableFilter<$PrismaModel>
     _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type VoterScalarRelationFilter = {
-    is?: VoterWhereInput
-    isNot?: VoterWhereInput
-  }
-
-  export type BursaryApplicationOrderByRelevanceInput = {
-    fields: BursaryApplicationOrderByRelevanceFieldEnum | BursaryApplicationOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type BursaryApplicationCountOrderByAggregateInput = {
-    id?: SortOrder
-    voterId?: SortOrder
-    userId?: SortOrder
-    studentName?: SortOrder
-    idNumber?: SortOrder
-    schoolName?: SortOrder
-    gradeLevel?: SortOrder
-    status?: SortOrder
-    amount?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type BursaryApplicationAvgOrderByAggregateInput = {
-    amount?: SortOrder
-  }
-
-  export type BursaryApplicationMaxOrderByAggregateInput = {
-    id?: SortOrder
-    voterId?: SortOrder
-    userId?: SortOrder
-    studentName?: SortOrder
-    idNumber?: SortOrder
-    schoolName?: SortOrder
-    gradeLevel?: SortOrder
-    status?: SortOrder
-    amount?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type BursaryApplicationMinOrderByAggregateInput = {
-    id?: SortOrder
-    voterId?: SortOrder
-    userId?: SortOrder
-    studentName?: SortOrder
-    idNumber?: SortOrder
-    schoolName?: SortOrder
-    gradeLevel?: SortOrder
-    status?: SortOrder
-    amount?: SortOrder
-    notes?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type BursaryApplicationSumOrderByAggregateInput = {
-    amount?: SortOrder
   }
 
   export type BursaryDistributionOrderByRelevanceInput = {
@@ -17059,19 +15620,6 @@ export namespace Prisma {
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
   }
 
-  export type VoterCreateNestedOneWithoutUserInput = {
-    create?: XOR<VoterCreateWithoutUserInput, VoterUncheckedCreateWithoutUserInput>
-    connectOrCreate?: VoterCreateOrConnectWithoutUserInput
-    connect?: VoterWhereUniqueInput
-  }
-
-  export type BursaryApplicationCreateNestedManyWithoutUserInput = {
-    create?: XOR<BursaryApplicationCreateWithoutUserInput, BursaryApplicationUncheckedCreateWithoutUserInput> | BursaryApplicationCreateWithoutUserInput[] | BursaryApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutUserInput | BursaryApplicationCreateOrConnectWithoutUserInput[]
-    createMany?: BursaryApplicationCreateManyUserInputEnvelope
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-  }
-
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -17091,19 +15639,6 @@ export namespace Prisma {
     connectOrCreate?: PostCreateOrConnectWithoutCreatedByInput | PostCreateOrConnectWithoutCreatedByInput[]
     createMany?: PostCreateManyCreatedByInputEnvelope
     connect?: PostWhereUniqueInput | PostWhereUniqueInput[]
-  }
-
-  export type VoterUncheckedCreateNestedOneWithoutUserInput = {
-    create?: XOR<VoterCreateWithoutUserInput, VoterUncheckedCreateWithoutUserInput>
-    connectOrCreate?: VoterCreateOrConnectWithoutUserInput
-    connect?: VoterWhereUniqueInput
-  }
-
-  export type BursaryApplicationUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<BursaryApplicationCreateWithoutUserInput, BursaryApplicationUncheckedCreateWithoutUserInput> | BursaryApplicationCreateWithoutUserInput[] | BursaryApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutUserInput | BursaryApplicationCreateOrConnectWithoutUserInput[]
-    createMany?: BursaryApplicationCreateManyUserInputEnvelope
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -17152,30 +15687,6 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
-  export type VoterUpdateOneWithoutUserNestedInput = {
-    create?: XOR<VoterCreateWithoutUserInput, VoterUncheckedCreateWithoutUserInput>
-    connectOrCreate?: VoterCreateOrConnectWithoutUserInput
-    upsert?: VoterUpsertWithoutUserInput
-    disconnect?: VoterWhereInput | boolean
-    delete?: VoterWhereInput | boolean
-    connect?: VoterWhereUniqueInput
-    update?: XOR<XOR<VoterUpdateToOneWithWhereWithoutUserInput, VoterUpdateWithoutUserInput>, VoterUncheckedUpdateWithoutUserInput>
-  }
-
-  export type BursaryApplicationUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BursaryApplicationCreateWithoutUserInput, BursaryApplicationUncheckedCreateWithoutUserInput> | BursaryApplicationCreateWithoutUserInput[] | BursaryApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutUserInput | BursaryApplicationCreateOrConnectWithoutUserInput[]
-    upsert?: BursaryApplicationUpsertWithWhereUniqueWithoutUserInput | BursaryApplicationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BursaryApplicationCreateManyUserInputEnvelope
-    set?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    disconnect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    delete?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    update?: BursaryApplicationUpdateWithWhereUniqueWithoutUserInput | BursaryApplicationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BursaryApplicationUpdateManyWithWhereWithoutUserInput | BursaryApplicationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BursaryApplicationScalarWhereInput | BursaryApplicationScalarWhereInput[]
-  }
-
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -17218,84 +15729,60 @@ export namespace Prisma {
     deleteMany?: PostScalarWhereInput | PostScalarWhereInput[]
   }
 
-  export type VoterUncheckedUpdateOneWithoutUserNestedInput = {
-    create?: XOR<VoterCreateWithoutUserInput, VoterUncheckedCreateWithoutUserInput>
-    connectOrCreate?: VoterCreateOrConnectWithoutUserInput
-    upsert?: VoterUpsertWithoutUserInput
-    disconnect?: VoterWhereInput | boolean
-    delete?: VoterWhereInput | boolean
-    connect?: VoterWhereUniqueInput
-    update?: XOR<XOR<VoterUpdateToOneWithWhereWithoutUserInput, VoterUpdateWithoutUserInput>, VoterUncheckedUpdateWithoutUserInput>
+  export type ProjectMediaCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectMediaCreateWithoutProjectInput, ProjectMediaUncheckedCreateWithoutProjectInput> | ProjectMediaCreateWithoutProjectInput[] | ProjectMediaUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectMediaCreateOrConnectWithoutProjectInput | ProjectMediaCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectMediaCreateManyProjectInputEnvelope
+    connect?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
   }
 
-  export type BursaryApplicationUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<BursaryApplicationCreateWithoutUserInput, BursaryApplicationUncheckedCreateWithoutUserInput> | BursaryApplicationCreateWithoutUserInput[] | BursaryApplicationUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutUserInput | BursaryApplicationCreateOrConnectWithoutUserInput[]
-    upsert?: BursaryApplicationUpsertWithWhereUniqueWithoutUserInput | BursaryApplicationUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: BursaryApplicationCreateManyUserInputEnvelope
-    set?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    disconnect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    delete?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    update?: BursaryApplicationUpdateWithWhereUniqueWithoutUserInput | BursaryApplicationUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: BursaryApplicationUpdateManyWithWhereWithoutUserInput | BursaryApplicationUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: BursaryApplicationScalarWhereInput | BursaryApplicationScalarWhereInput[]
+  export type ProjectMediaUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectMediaCreateWithoutProjectInput, ProjectMediaUncheckedCreateWithoutProjectInput> | ProjectMediaCreateWithoutProjectInput[] | ProjectMediaUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectMediaCreateOrConnectWithoutProjectInput | ProjectMediaCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectMediaCreateManyProjectInputEnvelope
+    connect?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
   }
 
-  export type UserCreateNestedOneWithoutVotersInput = {
-    create?: XOR<UserCreateWithoutVotersInput, UserUncheckedCreateWithoutVotersInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVotersInput
-    connect?: UserWhereUniqueInput
+  export type ProjectMediaUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectMediaCreateWithoutProjectInput, ProjectMediaUncheckedCreateWithoutProjectInput> | ProjectMediaCreateWithoutProjectInput[] | ProjectMediaUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectMediaCreateOrConnectWithoutProjectInput | ProjectMediaCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectMediaUpsertWithWhereUniqueWithoutProjectInput | ProjectMediaUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectMediaCreateManyProjectInputEnvelope
+    set?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    disconnect?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    delete?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    connect?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    update?: ProjectMediaUpdateWithWhereUniqueWithoutProjectInput | ProjectMediaUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectMediaUpdateManyWithWhereWithoutProjectInput | ProjectMediaUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectMediaScalarWhereInput | ProjectMediaScalarWhereInput[]
   }
 
-  export type BursaryApplicationCreateNestedManyWithoutVoterInput = {
-    create?: XOR<BursaryApplicationCreateWithoutVoterInput, BursaryApplicationUncheckedCreateWithoutVoterInput> | BursaryApplicationCreateWithoutVoterInput[] | BursaryApplicationUncheckedCreateWithoutVoterInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutVoterInput | BursaryApplicationCreateOrConnectWithoutVoterInput[]
-    createMany?: BursaryApplicationCreateManyVoterInputEnvelope
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
+  export type ProjectMediaUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectMediaCreateWithoutProjectInput, ProjectMediaUncheckedCreateWithoutProjectInput> | ProjectMediaCreateWithoutProjectInput[] | ProjectMediaUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectMediaCreateOrConnectWithoutProjectInput | ProjectMediaCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectMediaUpsertWithWhereUniqueWithoutProjectInput | ProjectMediaUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectMediaCreateManyProjectInputEnvelope
+    set?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    disconnect?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    delete?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    connect?: ProjectMediaWhereUniqueInput | ProjectMediaWhereUniqueInput[]
+    update?: ProjectMediaUpdateWithWhereUniqueWithoutProjectInput | ProjectMediaUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectMediaUpdateManyWithWhereWithoutProjectInput | ProjectMediaUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectMediaScalarWhereInput | ProjectMediaScalarWhereInput[]
   }
 
-  export type BursaryApplicationUncheckedCreateNestedManyWithoutVoterInput = {
-    create?: XOR<BursaryApplicationCreateWithoutVoterInput, BursaryApplicationUncheckedCreateWithoutVoterInput> | BursaryApplicationCreateWithoutVoterInput[] | BursaryApplicationUncheckedCreateWithoutVoterInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutVoterInput | BursaryApplicationCreateOrConnectWithoutVoterInput[]
-    createMany?: BursaryApplicationCreateManyVoterInputEnvelope
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
+  export type ProjectCreateNestedOneWithoutMediaInput = {
+    create?: XOR<ProjectCreateWithoutMediaInput, ProjectUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutMediaInput
+    connect?: ProjectWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutVotersNestedInput = {
-    create?: XOR<UserCreateWithoutVotersInput, UserUncheckedCreateWithoutVotersInput>
-    connectOrCreate?: UserCreateOrConnectWithoutVotersInput
-    upsert?: UserUpsertWithoutVotersInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutVotersInput, UserUpdateWithoutVotersInput>, UserUncheckedUpdateWithoutVotersInput>
-  }
-
-  export type BursaryApplicationUpdateManyWithoutVoterNestedInput = {
-    create?: XOR<BursaryApplicationCreateWithoutVoterInput, BursaryApplicationUncheckedCreateWithoutVoterInput> | BursaryApplicationCreateWithoutVoterInput[] | BursaryApplicationUncheckedCreateWithoutVoterInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutVoterInput | BursaryApplicationCreateOrConnectWithoutVoterInput[]
-    upsert?: BursaryApplicationUpsertWithWhereUniqueWithoutVoterInput | BursaryApplicationUpsertWithWhereUniqueWithoutVoterInput[]
-    createMany?: BursaryApplicationCreateManyVoterInputEnvelope
-    set?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    disconnect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    delete?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    update?: BursaryApplicationUpdateWithWhereUniqueWithoutVoterInput | BursaryApplicationUpdateWithWhereUniqueWithoutVoterInput[]
-    updateMany?: BursaryApplicationUpdateManyWithWhereWithoutVoterInput | BursaryApplicationUpdateManyWithWhereWithoutVoterInput[]
-    deleteMany?: BursaryApplicationScalarWhereInput | BursaryApplicationScalarWhereInput[]
-  }
-
-  export type BursaryApplicationUncheckedUpdateManyWithoutVoterNestedInput = {
-    create?: XOR<BursaryApplicationCreateWithoutVoterInput, BursaryApplicationUncheckedCreateWithoutVoterInput> | BursaryApplicationCreateWithoutVoterInput[] | BursaryApplicationUncheckedCreateWithoutVoterInput[]
-    connectOrCreate?: BursaryApplicationCreateOrConnectWithoutVoterInput | BursaryApplicationCreateOrConnectWithoutVoterInput[]
-    upsert?: BursaryApplicationUpsertWithWhereUniqueWithoutVoterInput | BursaryApplicationUpsertWithWhereUniqueWithoutVoterInput[]
-    createMany?: BursaryApplicationCreateManyVoterInputEnvelope
-    set?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    disconnect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    delete?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    connect?: BursaryApplicationWhereUniqueInput | BursaryApplicationWhereUniqueInput[]
-    update?: BursaryApplicationUpdateWithWhereUniqueWithoutVoterInput | BursaryApplicationUpdateWithWhereUniqueWithoutVoterInput[]
-    updateMany?: BursaryApplicationUpdateManyWithWhereWithoutVoterInput | BursaryApplicationUpdateManyWithWhereWithoutVoterInput[]
-    deleteMany?: BursaryApplicationScalarWhereInput | BursaryApplicationScalarWhereInput[]
+  export type ProjectUpdateOneRequiredWithoutMediaNestedInput = {
+    create?: XOR<ProjectCreateWithoutMediaInput, ProjectUncheckedCreateWithoutMediaInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutMediaInput
+    upsert?: ProjectUpsertWithoutMediaInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutMediaInput, ProjectUpdateWithoutMediaInput>, ProjectUncheckedUpdateWithoutMediaInput>
   }
 
   export type NullableFloatFieldUpdateOperationsInput = {
@@ -17304,34 +15791,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type VoterCreateNestedOneWithoutBursaryApplicationsInput = {
-    create?: XOR<VoterCreateWithoutBursaryApplicationsInput, VoterUncheckedCreateWithoutBursaryApplicationsInput>
-    connectOrCreate?: VoterCreateOrConnectWithoutBursaryApplicationsInput
-    connect?: VoterWhereUniqueInput
-  }
-
-  export type UserCreateNestedOneWithoutBursaryAppsInput = {
-    create?: XOR<UserCreateWithoutBursaryAppsInput, UserUncheckedCreateWithoutBursaryAppsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBursaryAppsInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type VoterUpdateOneRequiredWithoutBursaryApplicationsNestedInput = {
-    create?: XOR<VoterCreateWithoutBursaryApplicationsInput, VoterUncheckedCreateWithoutBursaryApplicationsInput>
-    connectOrCreate?: VoterCreateOrConnectWithoutBursaryApplicationsInput
-    upsert?: VoterUpsertWithoutBursaryApplicationsInput
-    connect?: VoterWhereUniqueInput
-    update?: XOR<XOR<VoterUpdateToOneWithWhereWithoutBursaryApplicationsInput, VoterUpdateWithoutBursaryApplicationsInput>, VoterUncheckedUpdateWithoutBursaryApplicationsInput>
-  }
-
-  export type UserUpdateOneRequiredWithoutBursaryAppsNestedInput = {
-    create?: XOR<UserCreateWithoutBursaryAppsInput, UserUncheckedCreateWithoutBursaryAppsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutBursaryAppsInput
-    upsert?: UserUpsertWithoutBursaryAppsInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBursaryAppsInput, UserUpdateWithoutBursaryAppsInput>, UserUncheckedUpdateWithoutBursaryAppsInput>
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -17596,8 +16055,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
-    voters?: VoterCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutPostsInput = {
@@ -17614,8 +16071,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    voters?: VoterUncheckedCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutPostsInput = {
@@ -17648,8 +16103,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
-    voters?: VoterUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutPostsInput = {
@@ -17666,8 +16119,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    voters?: VoterUncheckedUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -17684,8 +16135,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
-    voters?: VoterCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -17702,8 +16151,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    voters?: VoterUncheckedCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -17736,8 +16183,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -17754,8 +16199,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUncheckedUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -17772,8 +16215,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     posts?: PostCreateNestedManyWithoutCreatedByInput
-    voters?: VoterCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -17790,8 +16231,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    voters?: VoterUncheckedCreateNestedOneWithoutUserInput
-    bursaryApps?: BursaryApplicationUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -17824,8 +16263,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     posts?: PostUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -17842,8 +16279,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUncheckedUpdateOneWithoutUserNestedInput
-    bursaryApps?: BursaryApplicationUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -17928,73 +16363,6 @@ export namespace Prisma {
 
   export type PostCreateManyCreatedByInputEnvelope = {
     data: PostCreateManyCreatedByInput | PostCreateManyCreatedByInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type VoterCreateWithoutUserInput = {
-    id?: string
-    phone: string
-    name: string
-    ward: string
-    status?: string
-    smsToken?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    bursaryApplications?: BursaryApplicationCreateNestedManyWithoutVoterInput
-  }
-
-  export type VoterUncheckedCreateWithoutUserInput = {
-    id?: string
-    phone: string
-    name: string
-    ward: string
-    status?: string
-    smsToken?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    bursaryApplications?: BursaryApplicationUncheckedCreateNestedManyWithoutVoterInput
-  }
-
-  export type VoterCreateOrConnectWithoutUserInput = {
-    where: VoterWhereUniqueInput
-    create: XOR<VoterCreateWithoutUserInput, VoterUncheckedCreateWithoutUserInput>
-  }
-
-  export type BursaryApplicationCreateWithoutUserInput = {
-    id?: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    voter: VoterCreateNestedOneWithoutBursaryApplicationsInput
-  }
-
-  export type BursaryApplicationUncheckedCreateWithoutUserInput = {
-    id?: string
-    voterId: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BursaryApplicationCreateOrConnectWithoutUserInput = {
-    where: BursaryApplicationWhereUniqueInput
-    create: XOR<BursaryApplicationCreateWithoutUserInput, BursaryApplicationUncheckedCreateWithoutUserInput>
-  }
-
-  export type BursaryApplicationCreateManyUserInputEnvelope = {
-    data: BursaryApplicationCreateManyUserInput | BursaryApplicationCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -18086,367 +16454,133 @@ export namespace Prisma {
     createdById?: StringFilter<"Post"> | string
   }
 
-  export type VoterUpsertWithoutUserInput = {
-    update: XOR<VoterUpdateWithoutUserInput, VoterUncheckedUpdateWithoutUserInput>
-    create: XOR<VoterCreateWithoutUserInput, VoterUncheckedCreateWithoutUserInput>
-    where?: VoterWhereInput
-  }
-
-  export type VoterUpdateToOneWithWhereWithoutUserInput = {
-    where?: VoterWhereInput
-    data: XOR<VoterUpdateWithoutUserInput, VoterUncheckedUpdateWithoutUserInput>
-  }
-
-  export type VoterUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bursaryApplications?: BursaryApplicationUpdateManyWithoutVoterNestedInput
-  }
-
-  export type VoterUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bursaryApplications?: BursaryApplicationUncheckedUpdateManyWithoutVoterNestedInput
-  }
-
-  export type BursaryApplicationUpsertWithWhereUniqueWithoutUserInput = {
-    where: BursaryApplicationWhereUniqueInput
-    update: XOR<BursaryApplicationUpdateWithoutUserInput, BursaryApplicationUncheckedUpdateWithoutUserInput>
-    create: XOR<BursaryApplicationCreateWithoutUserInput, BursaryApplicationUncheckedCreateWithoutUserInput>
-  }
-
-  export type BursaryApplicationUpdateWithWhereUniqueWithoutUserInput = {
-    where: BursaryApplicationWhereUniqueInput
-    data: XOR<BursaryApplicationUpdateWithoutUserInput, BursaryApplicationUncheckedUpdateWithoutUserInput>
-  }
-
-  export type BursaryApplicationUpdateManyWithWhereWithoutUserInput = {
-    where: BursaryApplicationScalarWhereInput
-    data: XOR<BursaryApplicationUpdateManyMutationInput, BursaryApplicationUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type BursaryApplicationScalarWhereInput = {
-    AND?: BursaryApplicationScalarWhereInput | BursaryApplicationScalarWhereInput[]
-    OR?: BursaryApplicationScalarWhereInput[]
-    NOT?: BursaryApplicationScalarWhereInput | BursaryApplicationScalarWhereInput[]
-    id?: StringFilter<"BursaryApplication"> | string
-    voterId?: StringFilter<"BursaryApplication"> | string
-    userId?: StringFilter<"BursaryApplication"> | string
-    studentName?: StringFilter<"BursaryApplication"> | string
-    idNumber?: StringFilter<"BursaryApplication"> | string
-    schoolName?: StringFilter<"BursaryApplication"> | string
-    gradeLevel?: StringFilter<"BursaryApplication"> | string
-    status?: StringFilter<"BursaryApplication"> | string
-    amount?: FloatNullableFilter<"BursaryApplication"> | number | null
-    notes?: StringNullableFilter<"BursaryApplication"> | string | null
-    createdAt?: DateTimeFilter<"BursaryApplication"> | Date | string
-    updatedAt?: DateTimeFilter<"BursaryApplication"> | Date | string
-  }
-
-  export type UserCreateWithoutVotersInput = {
+  export type ProjectMediaCreateWithoutProjectInput = {
     id?: string
-    name?: string | null
-    email?: string | null
-    phone?: string | null
-    passwordHash?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    ward?: string | null
-    role?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
-    bursaryApps?: BursaryApplicationCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutVotersInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    phone?: string | null
-    passwordHash?: string | null
-    emailVerified?: Date | string | null
-    image?: string | null
-    ward?: string | null
-    role?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    bursaryApps?: BursaryApplicationUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutVotersInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutVotersInput, UserUncheckedCreateWithoutVotersInput>
-  }
-
-  export type BursaryApplicationCreateWithoutVoterInput = {
-    id?: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutBursaryAppsInput
-  }
-
-  export type BursaryApplicationUncheckedCreateWithoutVoterInput = {
-    id?: string
-    userId: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
+    url: string
+    caption?: string | null
+    sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type BursaryApplicationCreateOrConnectWithoutVoterInput = {
-    where: BursaryApplicationWhereUniqueInput
-    create: XOR<BursaryApplicationCreateWithoutVoterInput, BursaryApplicationUncheckedCreateWithoutVoterInput>
+  export type ProjectMediaUncheckedCreateWithoutProjectInput = {
+    id?: string
+    url: string
+    caption?: string | null
+    sortOrder?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type BursaryApplicationCreateManyVoterInputEnvelope = {
-    data: BursaryApplicationCreateManyVoterInput | BursaryApplicationCreateManyVoterInput[]
+  export type ProjectMediaCreateOrConnectWithoutProjectInput = {
+    where: ProjectMediaWhereUniqueInput
+    create: XOR<ProjectMediaCreateWithoutProjectInput, ProjectMediaUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectMediaCreateManyProjectInputEnvelope = {
+    data: ProjectMediaCreateManyProjectInput | ProjectMediaCreateManyProjectInput[]
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutVotersInput = {
-    update: XOR<UserUpdateWithoutVotersInput, UserUncheckedUpdateWithoutVotersInput>
-    create: XOR<UserCreateWithoutVotersInput, UserUncheckedCreateWithoutVotersInput>
-    where?: UserWhereInput
+  export type ProjectMediaUpsertWithWhereUniqueWithoutProjectInput = {
+    where: ProjectMediaWhereUniqueInput
+    update: XOR<ProjectMediaUpdateWithoutProjectInput, ProjectMediaUncheckedUpdateWithoutProjectInput>
+    create: XOR<ProjectMediaCreateWithoutProjectInput, ProjectMediaUncheckedCreateWithoutProjectInput>
   }
 
-  export type UserUpdateToOneWithWhereWithoutVotersInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutVotersInput, UserUncheckedUpdateWithoutVotersInput>
+  export type ProjectMediaUpdateWithWhereUniqueWithoutProjectInput = {
+    where: ProjectMediaWhereUniqueInput
+    data: XOR<ProjectMediaUpdateWithoutProjectInput, ProjectMediaUncheckedUpdateWithoutProjectInput>
   }
 
-  export type UserUpdateWithoutVotersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    ward?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
-    bursaryApps?: BursaryApplicationUpdateManyWithoutUserNestedInput
+  export type ProjectMediaUpdateManyWithWhereWithoutProjectInput = {
+    where: ProjectMediaScalarWhereInput
+    data: XOR<ProjectMediaUpdateManyMutationInput, ProjectMediaUncheckedUpdateManyWithoutProjectInput>
   }
 
-  export type UserUncheckedUpdateWithoutVotersInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    ward?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    bursaryApps?: BursaryApplicationUncheckedUpdateManyWithoutUserNestedInput
+  export type ProjectMediaScalarWhereInput = {
+    AND?: ProjectMediaScalarWhereInput | ProjectMediaScalarWhereInput[]
+    OR?: ProjectMediaScalarWhereInput[]
+    NOT?: ProjectMediaScalarWhereInput | ProjectMediaScalarWhereInput[]
+    id?: StringFilter<"ProjectMedia"> | string
+    projectId?: StringFilter<"ProjectMedia"> | string
+    url?: StringFilter<"ProjectMedia"> | string
+    caption?: StringNullableFilter<"ProjectMedia"> | string | null
+    sortOrder?: IntFilter<"ProjectMedia"> | number
+    createdAt?: DateTimeFilter<"ProjectMedia"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectMedia"> | Date | string
   }
 
-  export type BursaryApplicationUpsertWithWhereUniqueWithoutVoterInput = {
-    where: BursaryApplicationWhereUniqueInput
-    update: XOR<BursaryApplicationUpdateWithoutVoterInput, BursaryApplicationUncheckedUpdateWithoutVoterInput>
-    create: XOR<BursaryApplicationCreateWithoutVoterInput, BursaryApplicationUncheckedCreateWithoutVoterInput>
-  }
-
-  export type BursaryApplicationUpdateWithWhereUniqueWithoutVoterInput = {
-    where: BursaryApplicationWhereUniqueInput
-    data: XOR<BursaryApplicationUpdateWithoutVoterInput, BursaryApplicationUncheckedUpdateWithoutVoterInput>
-  }
-
-  export type BursaryApplicationUpdateManyWithWhereWithoutVoterInput = {
-    where: BursaryApplicationScalarWhereInput
-    data: XOR<BursaryApplicationUpdateManyMutationInput, BursaryApplicationUncheckedUpdateManyWithoutVoterInput>
-  }
-
-  export type VoterCreateWithoutBursaryApplicationsInput = {
+  export type ProjectCreateWithoutMediaInput = {
     id?: string
-    phone: string
-    name: string
-    ward: string
-    status?: string
-    smsToken?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutVotersInput
-  }
-
-  export type VoterUncheckedCreateWithoutBursaryApplicationsInput = {
-    id?: string
-    userId: string
-    phone: string
-    name: string
-    ward: string
-    status?: string
-    smsToken?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type VoterCreateOrConnectWithoutBursaryApplicationsInput = {
-    where: VoterWhereUniqueInput
-    create: XOR<VoterCreateWithoutBursaryApplicationsInput, VoterUncheckedCreateWithoutBursaryApplicationsInput>
-  }
-
-  export type UserCreateWithoutBursaryAppsInput = {
-    id?: string
-    name?: string | null
-    email?: string | null
-    phone?: string | null
-    passwordHash?: string | null
-    emailVerified?: Date | string | null
+    title: string
+    description: string
+    category: string
     image?: string | null
+    location?: string | null
+    status?: string
     ward?: string | null
-    role?: string
+    impact?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    posts?: PostCreateNestedManyWithoutCreatedByInput
-    voters?: VoterCreateNestedOneWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutBursaryAppsInput = {
+  export type ProjectUncheckedCreateWithoutMediaInput = {
     id?: string
-    name?: string | null
-    email?: string | null
-    phone?: string | null
-    passwordHash?: string | null
-    emailVerified?: Date | string | null
+    title: string
+    description: string
+    category: string
     image?: string | null
+    location?: string | null
+    status?: string
     ward?: string | null
-    role?: string
+    impact?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    posts?: PostUncheckedCreateNestedManyWithoutCreatedByInput
-    voters?: VoterUncheckedCreateNestedOneWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutBursaryAppsInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutBursaryAppsInput, UserUncheckedCreateWithoutBursaryAppsInput>
+  export type ProjectCreateOrConnectWithoutMediaInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutMediaInput, ProjectUncheckedCreateWithoutMediaInput>
   }
 
-  export type VoterUpsertWithoutBursaryApplicationsInput = {
-    update: XOR<VoterUpdateWithoutBursaryApplicationsInput, VoterUncheckedUpdateWithoutBursaryApplicationsInput>
-    create: XOR<VoterCreateWithoutBursaryApplicationsInput, VoterUncheckedCreateWithoutBursaryApplicationsInput>
-    where?: VoterWhereInput
+  export type ProjectUpsertWithoutMediaInput = {
+    update: XOR<ProjectUpdateWithoutMediaInput, ProjectUncheckedUpdateWithoutMediaInput>
+    create: XOR<ProjectCreateWithoutMediaInput, ProjectUncheckedCreateWithoutMediaInput>
+    where?: ProjectWhereInput
   }
 
-  export type VoterUpdateToOneWithWhereWithoutBursaryApplicationsInput = {
-    where?: VoterWhereInput
-    data: XOR<VoterUpdateWithoutBursaryApplicationsInput, VoterUncheckedUpdateWithoutBursaryApplicationsInput>
+  export type ProjectUpdateToOneWithWhereWithoutMediaInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutMediaInput, ProjectUncheckedUpdateWithoutMediaInput>
   }
 
-  export type VoterUpdateWithoutBursaryApplicationsInput = {
+  export type ProjectUpdateWithoutMediaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutVotersNestedInput
-  }
-
-  export type VoterUncheckedUpdateWithoutBursaryApplicationsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    phone?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    ward?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    smsToken?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type UserUpsertWithoutBursaryAppsInput = {
-    update: XOR<UserUpdateWithoutBursaryAppsInput, UserUncheckedUpdateWithoutBursaryAppsInput>
-    create: XOR<UserCreateWithoutBursaryAppsInput, UserUncheckedCreateWithoutBursaryAppsInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutBursaryAppsInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutBursaryAppsInput, UserUncheckedUpdateWithoutBursaryAppsInput>
-  }
-
-  export type UserUpdateWithoutBursaryAppsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     ward?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    posts?: PostUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUpdateOneWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutBursaryAppsInput = {
+  export type ProjectUncheckedUpdateWithoutMediaInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    passwordHash?: NullableStringFieldUpdateOperationsInput | string | null
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: StringFieldUpdateOperationsInput | string
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    location?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
     ward?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: StringFieldUpdateOperationsInput | string
+    impact?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    posts?: PostUncheckedUpdateManyWithoutCreatedByNestedInput
-    voters?: VoterUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -18473,20 +16607,6 @@ export namespace Prisma {
   export type PostCreateManyCreatedByInput = {
     id?: number
     name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type BursaryApplicationCreateManyUserInput = {
-    id?: string
-    voterId: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18574,100 +16694,38 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BursaryApplicationUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    voter?: VoterUpdateOneRequiredWithoutBursaryApplicationsNestedInput
-  }
-
-  export type BursaryApplicationUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    voterId?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BursaryApplicationUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    voterId?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BursaryApplicationCreateManyVoterInput = {
+  export type ProjectMediaCreateManyProjectInput = {
     id?: string
-    userId: string
-    studentName: string
-    idNumber: string
-    schoolName: string
-    gradeLevel: string
-    status?: string
-    amount?: number | null
-    notes?: string | null
+    url: string
+    caption?: string | null
+    sortOrder?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type BursaryApplicationUpdateWithoutVoterInput = {
+  export type ProjectMediaUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutBursaryAppsNestedInput
-  }
-
-  export type BursaryApplicationUncheckedUpdateWithoutVoterInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BursaryApplicationUncheckedUpdateManyWithoutVoterInput = {
+  export type ProjectMediaUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    studentName?: StringFieldUpdateOperationsInput | string
-    idNumber?: StringFieldUpdateOperationsInput | string
-    schoolName?: StringFieldUpdateOperationsInput | string
-    gradeLevel?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
-    amount?: NullableFloatFieldUpdateOperationsInput | number | null
-    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    url?: StringFieldUpdateOperationsInput | string
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectMediaUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    caption?: NullableStringFieldUpdateOperationsInput | string | null
+    sortOrder?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { api } from "~/trpc/react";
 
 type PollingStation = {
@@ -17,155 +17,121 @@ type PollingStation = {
 
 export default function PollingStationsPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedWard, setSelectedWard] = useState<string | null>(null);
 
   const { data: stations, isLoading } = api.pollingStation.getAll.useQuery({
-    ward: selectedWard ?? undefined,
+    ward: "Embakasi Central",
   });
 
-  const kenyanWards = [
-    "Embakasi Central",
-    "Embakasi East",
-    "Embakasi North",
-    "Embakasi South",
-    "Embakasi West",
-  ];
+  const allStations = (stations ?? []) as PollingStation[];
 
-  const filteredStations = (stations ?? []).filter((station) =>
-    searchQuery === ""
-      ? true
-      : station.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          station.code.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredStations = useMemo(
+    () =>
+      allStations.filter((station) => {
+        const query = searchQuery.trim().toLowerCase();
+        if (!query) {
+          return true;
+        }
+
+        return [station.name, station.code, station.location, station.ward]
+          .filter(Boolean)
+          .some((value) => value.toLowerCase().includes(query));
+      }),
+    [allStations, searchQuery]
   );
+
+  const schoolBasedCount = filteredStations.length;
 
   const getGoogleMapsLink = (station: PollingStation) => {
     if (station.latitude && station.longitude) {
       return `https://www.google.com/maps/search/?api=1&query=${station.latitude},${station.longitude}`;
     }
+
     return `https://www.google.com/maps/search/${encodeURIComponent(station.location)}+${encodeURIComponent(station.ward)}`;
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="mx-auto max-w-6xl px-4">
-        {/* Header */}
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-md-green">Find Your Polling Station</h1>
-          <p className="text-lg text-gray-600">
-            Locate your nearest polling station to cast your vote on election day
+    <main className="min-h-screen bg-gradient-to-b from-md-green/10 via-white to-white py-12">
+      <div className="mx-auto max-w-7xl px-4">
+        <header className="mb-8 text-center">
+          <p className="mb-2 text-xs font-bold uppercase tracking-[0.3em] text-md-green">Embakasi Central</p>
+          <h1 className="mb-4 text-4xl font-bold text-md-green md:text-5xl">Polling stations</h1>
+          <p className="mx-auto max-w-3xl text-lg text-gray-600">
+            Find your polling station quickly and open directions in Google Maps.
           </p>
+        </header>
+
+        <div className="mb-8 grid gap-4 rounded-3xl border border-gray-200 bg-white p-4 shadow-sm md:grid-cols-3">
+          <label className="md:col-span-2">
+            <span className="mb-2 block text-sm font-semibold text-gray-700">Search stations</span>
+            <input
+              type="text"
+              placeholder="Search by school name, code, or location"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-2xl border-2 border-gray-200 px-4 py-3 transition focus:border-md-green focus:outline-none"
+            />
+          </label>
+
+          <div className="rounded-2xl bg-gradient-to-br from-md-green to-green-700 p-4 text-white">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/75">Coverage</p>
+            <div className="mt-2 text-3xl font-black">{schoolBasedCount}</div>
+            <p className="text-sm text-white/85">Stations listed for Embakasi Central</p>
+          </div>
         </div>
 
-        {/* Filters */}
-        <div className="mb-8 grid gap-4 md:grid-cols-2">
-          {/* Search Input */}
-          <input
-            type="text"
-            placeholder="Search by name or code..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="rounded-lg border-2 border-gray-300 px-4 py-3 transition focus:border-md-green focus:outline-none"
-          />
-
-          {/* Ward Filter */}
-          <select
-            value={selectedWard ?? ""}
-            onChange={(e) => setSelectedWard(e.target.value || null)}
-            className="rounded-lg border-2 border-gray-300 px-4 py-3 transition focus:border-md-green focus:outline-none"
-          >
-            <option value="">All Wards</option>
-            {kenyanWards.map((ward) => (
-              <option key={ward} value={ward}>
-                {ward}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Results */}
-        <div className="space-y-4">
+        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {isLoading ? (
-            <div className="flex items-center justify-center rounded-lg bg-white py-12">
+            <div className="col-span-full rounded-3xl bg-white py-16 text-center shadow-sm">
               <div className="text-gray-600">Loading polling stations...</div>
             </div>
           ) : filteredStations.length === 0 ? (
-            <div className="flex items-center justify-center rounded-lg bg-white py-12">
-              <div className="text-center text-gray-600">
-                <p className="text-lg font-semibold">No polling stations found</p>
-                <p className="text-sm">Try adjusting your search or filter</p>
-              </div>
+            <div className="col-span-full rounded-3xl bg-white py-16 text-center shadow-sm">
+              <p className="text-lg font-semibold text-gray-900">No polling stations found</p>
+              <p className="text-sm text-gray-600">Try a different search term or update the station records in admin.</p>
             </div>
           ) : (
             filteredStations.map((station) => (
-              <div key={station.id} className="rounded-lg bg-white p-6 shadow-md hover:shadow-lg transition">
-                <div className="grid gap-4 md:grid-cols-2">
-                  {/* Station Info */}
+              <article key={station.id} className="rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+                <div className="mb-3 flex items-start justify-between gap-3">
                   <div>
-                    <h3 className="mb-2 text-xl font-bold text-md-green">{station.name}</h3>
-                    <div className="space-y-2 text-sm text-gray-700">
-                      <p>
-                        <span className="font-semibold">Code:</span> {" "}
-                        <span className="inline-block rounded-full bg-md-gold/20 px-3 py-1 text-sm font-semibold text-md-dark">
-                          {station.code}
-                        </span>
-                      </p>
-                      <p>
-                        <span className="font-semibold">Ward:</span> {station.ward}
-                      </p>
-                      <p>
-                        <span className="font-semibold">Location:</span> {station.location}
-                      </p>
-                      <p>
-                        <span className="font-semibold">Registered Voters:</span> {" "}
-                        <span className="font-bold text-md-green">{station.voters}</span>
-                      </p>
-                      <p>
-                        <span className="font-semibold">Status:</span> {" "}
-                        <span className={`px-2 py-1 rounded text-xs font-semibold ${
-                          station.status === "active"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-gray-100 text-gray-800"
-                        }`}>
-                          {station.status}
-                        </span>
-                      </p>
-                    </div>
+                    <h2 className="text-xl font-bold text-md-dark">{station.name}</h2>
+                    <p className="text-sm font-semibold text-md-green">{station.ward}</p>
                   </div>
-
-                  {/* Map Button */}
-                  <div className="flex flex-col justify-center gap-3">
-                    <a
-                      href={getGoogleMapsLink(station)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2 rounded-lg bg-md-green px-6 py-3 font-medium text-white hover:bg-opacity-90 transition"
-                    >
-                      📍 View on Google Maps
-                    </a>
-                    {station.latitude && station.longitude && (
-                      <div className="rounded-lg bg-gray-50 p-3 text-xs text-gray-600">
-                        <p>📧 Coordinates: {station.latitude.toFixed(6)}, {station.longitude.toFixed(6)}</p>
-                      </div>
-                    )}
-                  </div>
+                  <span className="rounded-full bg-md-gold/20 px-3 py-1 text-xs font-bold text-md-dark">
+                    {station.code}
+                  </span>
                 </div>
-              </div>
+
+                <p className="mb-4 text-sm leading-6 text-gray-700">{station.location}</p>
+
+                <div className="mb-4 grid gap-2 text-sm text-gray-600">
+                  <p>
+                    <span className="font-semibold">Registered voters:</span> {station.voters}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Status:</span> {station.status}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Coordinates:</span>{" "}
+                    {station.latitude && station.longitude
+                      ? `${station.latitude.toFixed(6)}, ${station.longitude.toFixed(6)}`
+                      : "Not available"}
+                  </p>
+                </div>
+
+                <a
+                  href={getGoogleMapsLink(station)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-md-green px-5 py-3 text-sm font-bold text-white transition hover:bg-green-700"
+                >
+                  View on Google Maps
+                </a>
+              </article>
             ))
           )}
-        </div>
-
-        {/* Info Box */}
-        <div className="mt-8 rounded-lg border-l-4 border-md-gold bg-yellow-50 p-6">
-          <h3 className="mb-2 font-bold text-md-dark">Voting Tips</h3>
-          <ul className="space-y-2 text-sm text-gray-700">
-            <li>• Bring your national ID or passport on election day</li>
-            <li>• Visit your assigned polling station early to avoid queues</li>
-            <li>• Use Google Maps to get directions to your polling station</li>
-            <li>• Voting hours are typically 6 AM to 5 PM (check your station details)</li>
-            <li>• Ask poll staff if you have any questions about the voting process</li>
-          </ul>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

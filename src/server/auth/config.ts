@@ -1,5 +1,5 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { type DefaultSession, type NextAuthConfig } from "next-auth";
+import { type DefaultSession, type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { db } from "~/server/db";
@@ -118,6 +118,10 @@ export const authConfig = {
     }),
   ],
   adapter: PrismaAdapter(db),
+  // Credentials auth is most reliable with JWT sessions in NextAuth v4.
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
@@ -131,13 +135,16 @@ export const authConfig = {
       return token;
     },
     session: async ({ session, token, user }) => {
-      const userPhone = "phone" in user && typeof user.phone === "string" ? user.phone : undefined;
-      const userWard = "ward" in user && typeof user.ward === "string" ? user.ward : undefined;
+      const userPhone =
+        user && "phone" in user && typeof user.phone === "string" ? user.phone : undefined;
+      const userWard =
+        user && "ward" in user && typeof user.ward === "string" ? user.ward : undefined;
 
       return {
         ...session,
         user: {
           ...session.user,
+          id: (token.sub as string | undefined) ?? session.user?.email ?? "",
           phone: (token.phone as string | undefined) ?? userPhone,
           ward: (token.ward as string | undefined) ?? userWard,
         },
@@ -149,6 +156,5 @@ export const authConfig = {
     signIn: "/admin-login",
     error: "/admin-login",
   },
-  trustHost: true,
   secret: env.AUTH_SECRET,
-} satisfies NextAuthConfig;
+} satisfies NextAuthOptions;

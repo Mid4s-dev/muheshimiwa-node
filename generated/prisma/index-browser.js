@@ -173,27 +173,26 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
   expires: 'expires'
 };
 
-exports.Prisma.VoterScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  phone: 'phone',
-  name: 'name',
-  ward: 'ward',
-  status: 'status',
-  smsToken: 'smsToken',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ProjectScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
   category: 'category',
   image: 'image',
+  location: 'location',
   status: 'status',
   ward: 'ward',
   impact: 'impact',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProjectMediaScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  url: 'url',
+  caption: 'caption',
+  sortOrder: 'sortOrder',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -208,21 +207,6 @@ exports.Prisma.PollingStationScalarFieldEnum = {
   longitude: 'longitude',
   voters: 'voters',
   status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.BursaryApplicationScalarFieldEnum = {
-  id: 'id',
-  voterId: 'voterId',
-  userId: 'userId',
-  studentName: 'studentName',
-  idNumber: 'idNumber',
-  schoolName: 'schoolName',
-  gradeLevel: 'gradeLevel',
-  status: 'status',
-  amount: 'amount',
-  notes: 'notes',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -326,25 +310,23 @@ exports.Prisma.VerificationTokenOrderByRelevanceFieldEnum = {
   token: 'token'
 };
 
-exports.Prisma.VoterOrderByRelevanceFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  phone: 'phone',
-  name: 'name',
-  ward: 'ward',
-  status: 'status',
-  smsToken: 'smsToken'
-};
-
 exports.Prisma.ProjectOrderByRelevanceFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
   category: 'category',
   image: 'image',
+  location: 'location',
   status: 'status',
   ward: 'ward',
   impact: 'impact'
+};
+
+exports.Prisma.ProjectMediaOrderByRelevanceFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  url: 'url',
+  caption: 'caption'
 };
 
 exports.Prisma.PollingStationOrderByRelevanceFieldEnum = {
@@ -354,18 +336,6 @@ exports.Prisma.PollingStationOrderByRelevanceFieldEnum = {
   ward: 'ward',
   location: 'location',
   status: 'status'
-};
-
-exports.Prisma.BursaryApplicationOrderByRelevanceFieldEnum = {
-  id: 'id',
-  voterId: 'voterId',
-  userId: 'userId',
-  studentName: 'studentName',
-  idNumber: 'idNumber',
-  schoolName: 'schoolName',
-  gradeLevel: 'gradeLevel',
-  status: 'status',
-  notes: 'notes'
 };
 
 exports.Prisma.BursaryDistributionOrderByRelevanceFieldEnum = {
@@ -417,10 +387,9 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   User: 'User',
   VerificationToken: 'VerificationToken',
-  Voter: 'Voter',
   Project: 'Project',
+  ProjectMedia: 'ProjectMedia',
   PollingStation: 'PollingStation',
-  BursaryApplication: 'BursaryApplication',
   BursaryDistribution: 'BursaryDistribution',
   MailingList: 'MailingList',
   ImpactStory: 'ImpactStory'

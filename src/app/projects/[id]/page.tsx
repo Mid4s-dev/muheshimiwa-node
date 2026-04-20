@@ -13,6 +13,13 @@ export default function ProjectBlogPage() {
     { enabled: !!projectId }
   );
 
+  const heroImage = project?.image ?? project?.media?.[0]?.url;
+  const galleryImages = project?.media
+    ? project.image
+      ? project.media
+      : project.media.slice(1)
+    : [];
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 px-4 py-16">
@@ -43,9 +50,9 @@ export default function ProjectBlogPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-md-green/10 to-white px-4 py-12">
       <article className="mx-auto max-w-4xl overflow-hidden rounded-2xl bg-white shadow-xl">
-        {project.image && (
+        {heroImage && (
           <div className="h-72 w-full overflow-hidden bg-gray-100 md:h-96">
-            <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+            <img src={heroImage} alt={project.title} className="h-full w-full object-cover" />
           </div>
         )}
 
@@ -60,6 +67,11 @@ export default function ProjectBlogPage() {
             {project.ward && (
               <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800">
                 {project.ward}
+              </span>
+            )}
+            {project.location && (
+              <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-800">
+                {project.location}
               </span>
             )}
           </div>
@@ -81,20 +93,23 @@ export default function ProjectBlogPage() {
             ))}
           </div>
 
-          {project.image && (
+          {galleryImages.length > 0 && (
             <section className="mt-10">
-              <h2 className="mb-4 text-2xl font-bold text-gray-900">Project Photos</h2>
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <img
-                  src={project.image}
-                  alt={`${project.title} photo 1`}
-                  className="h-64 w-full rounded-xl object-cover"
-                />
-                <img
-                  src={project.image}
-                  alt={`${project.title} photo 2`}
-                  className="h-64 w-full rounded-xl object-cover"
-                />
+              <h2 className="mb-4 text-2xl font-bold text-gray-900">Project Gallery</h2>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {galleryImages.map((media, index) => (
+                  <figure key={media.id} className="overflow-hidden rounded-xl bg-gray-100 shadow-sm">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={media.url}
+                      alt={media.caption ?? `${project.title} image ${index + 1}`}
+                      className="h-64 w-full object-cover"
+                    />
+                    {media.caption && (
+                      <figcaption className="px-3 py-2 text-xs text-gray-500">{media.caption}</figcaption>
+                    )}
+                  </figure>
+                ))}
               </div>
             </section>
           )}

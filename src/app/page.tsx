@@ -1,31 +1,14 @@
 import Link from "next/link";
 import { api } from "~/trpc/server";
 
-export const revalidate = 3600; // ISR - revalidate every hour
+export const revalidate = 0;
 
 export default async function HomePage() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   const impactStories = await api.impactStory.getFeatured();
-  const projects = [
-    {
-      id: "1",
-      title: "New Water System in Embakasi South",
-      description: "A state-of-the-art water distribution system bringing clean water to 5,000 households.",
-      category: "Infrastructure",
-    },
-    {
-      id: "2",
-      title: "500 Students Scholarship Program",
-      description: "Educational sponsorship enabling bright minds to pursue higher education.",
-      category: "Education",
-    },
-    {
-      id: "3",
-      title: "Community Healthcare Initiative",
-      description: "Mobile clinics and health awareness programs across 8 wards.",
-      category: "Health",
-    },
-  ];
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  const projects = await api.project.getAll();
+  const featuredProjects = projects.slice(0, 3);
 
   const stats = [
     { number: "500+", label: "Students Sponsored", description: "Higher education scholarships" },
@@ -37,13 +20,18 @@ export default async function HomePage() {
   return (
     <main className="flex-grow">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-md-green via-md-dark to-md-green py-24 text-white md:py-40">
+      <section className="relative overflow-hidden bg-md-dark py-24 text-white md:py-40">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url("/images/mejjadonkk_bg%20_cover.jpg")' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-md-green/80 via-md-dark/75 to-md-dark/90" />
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">
-          <div className="mb-6 inline-block rounded-full bg-md-dark/40 px-4 py-2 text-md-gold">
+          <div className="mb-6 inline-block rounded-full border border-white/20 bg-black/25 px-4 py-2 text-md-gold backdrop-blur-sm">
             Vote for Real Change
           </div>
           <h1 className="mb-6 text-5xl font-black leading-tight md:text-6xl">
-            Embakasi Deserves Better
+            MejjaDonk for 3 term 
           </h1>
           <p className="mb-8 text-lg text-white/90 md:text-xl">
             Real leadership, real results. Hon. Mejja Donk has delivered for Embakasi Central.
@@ -133,6 +121,57 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Parliamentary Contributions */}
+      <section className="bg-white py-16 md:py-24">
+        <div className="mx-auto max-w-6xl px-4">
+          <h2 className="mb-4 text-center text-4xl font-bold text-md-green md:text-5xl">
+            Parliamentary Contributions
+          </h2>
+          <p className="mx-auto mb-12 max-w-3xl text-center text-lg text-gray-600">
+            In Parliament and within the constituency, Hon. Mejja Donk has focused on practical
+            legislation support, oversight, and grassroots delivery that residents can measure.
+          </p>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <article className="rounded-xl border border-gray-200 bg-gray-50 p-6 shadow-sm">
+              <h3 className="mb-2 text-xl font-bold text-md-dark">Education and Bursary Access</h3>
+              <p className="text-gray-700">
+                Championed fairer bursary processes, improved follow-up for disbursement timelines,
+                and supported pathways for more students from vulnerable households.
+              </p>
+              <p className="mt-3 text-sm font-semibold text-md-green">Result: Wider student support coverage</p>
+            </article>
+
+            <article className="rounded-xl border border-gray-200 bg-gray-50 p-6 shadow-sm">
+              <h3 className="mb-2 text-xl font-bold text-md-dark">Infrastructure Oversight</h3>
+              <p className="text-gray-700">
+                Pushed for implementation tracking on roads, drainage, and public utilities to ensure
+                budgeted projects move from paperwork to completed community assets.
+              </p>
+              <p className="mt-3 text-sm font-semibold text-md-green">Result: Better project accountability</p>
+            </article>
+
+            <article className="rounded-xl border border-gray-200 bg-gray-50 p-6 shadow-sm">
+              <h3 className="mb-2 text-xl font-bold text-md-dark">Security and Public Safety</h3>
+              <p className="text-gray-700">
+                Supported resource allocation and local safety interventions, including lighting and
+                community safety coordination in high-risk areas.
+              </p>
+              <p className="mt-3 text-sm font-semibold text-md-green">Result: Safer movement in key zones</p>
+            </article>
+
+            <article className="rounded-xl border border-gray-200 bg-gray-50 p-6 shadow-sm">
+              <h3 className="mb-2 text-xl font-bold text-md-dark">Constituency Voice in Parliament</h3>
+              <p className="text-gray-700">
+                Consistently raised local service-delivery priorities and pressed ministries to respond
+                to issues affecting Embakasi Central families and small businesses.
+              </p>
+              <p className="mt-3 text-sm font-semibold text-md-green">Result: Stronger representation on local priorities</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Grid */}
       <section className="bg-white py-16 md:py-24">
         <div className="mx-auto max-w-6xl px-4">
@@ -140,8 +179,17 @@ export default async function HomePage() {
             Recent Maendeleo Successes
           </h2>
           <div className="grid gap-8 md:grid-cols-3">
-            {projects.map((project) => (
+            {featuredProjects.map((project) => {
+              const projectImage = project.image ?? project.media?.[0]?.url ?? null;
+
+              return (
               <div key={project.id} className="rounded-lg bg-gray-50 p-6 shadow transition hover:shadow-lg">
+                {projectImage && (
+                  <div className="mb-4 h-40 overflow-hidden rounded-lg bg-gray-200">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={projectImage} alt={project.title} className="h-full w-full object-cover" />
+                  </div>
+                )}
                 <div className="mb-3 inline-block rounded-full bg-md-gold px-3 py-1 text-sm font-semibold text-md-dark">
                   {project.category}
                 </div>
@@ -151,7 +199,8 @@ export default async function HomePage() {
                   Learn More
                 </Link>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

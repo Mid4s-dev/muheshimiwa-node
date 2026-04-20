@@ -9,7 +9,6 @@ export default function ProjectsPage() {
 
   const { data: projects, isLoading } = api.project.getAll.useQuery({
     category: selectedCategory ?? undefined,
-    status: "active",
   });
 
   const categories = Array.from(new Set((projects ?? []).map((project) => project.category)));
@@ -56,6 +55,13 @@ export default function ProjectsPage() {
           ))}
         </div>
 
+        {!isLoading && filteredProjects && filteredProjects.length > 0 && (
+          <div className="mb-6 text-center text-sm text-gray-500">
+            Showing {filteredProjects.length} project{filteredProjects.length === 1 ? "" : "s"}
+            {selectedCategory ? ` in ${selectedCategory}` : " across all categories"}.
+          </div>
+        )}
+
         {/* Projects Grid */}
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {isLoading ? (
@@ -99,6 +105,12 @@ export default function ProjectsPage() {
                   {project.ward && (
                     <p className="mb-3 text-sm text-md-green font-semibold">
                       📍 {project.ward}
+                    </p>
+                  )}
+
+                  {project.location && (
+                    <p className="mb-3 text-sm text-gray-600">
+                      <span className="font-semibold">Location:</span> {project.location}
                     </p>
                   )}
 

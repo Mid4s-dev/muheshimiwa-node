@@ -23,7 +23,8 @@ const db = new PrismaClient();
       console.log("---");
     });
   } catch (e) {
-    console.error("Error:", e.message);
+    const message = e instanceof Error ? e.message : String(e);
+    console.error("Error:", message);
   } finally {
     await db.$disconnect();
   }

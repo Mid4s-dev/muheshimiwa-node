@@ -1,10 +1,11 @@
 import "../styles/globals.css";
 
 import { type Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
-import { SessionProvider } from "next-auth/react";
 
-import { TRPCReactProvider } from "~/trpc/react";
+import { Providers } from "./_components/providers";
+import { VisitTracker } from "./_components/visit-tracker";
 import { auth } from "~/server/auth";
 import { AuthNav } from "./_components/auth-nav";
 import { MobileNav } from "./_components/mobile-nav";
@@ -12,7 +13,7 @@ import { MobileNav } from "./_components/mobile-nav";
 export const metadata: Metadata = {
   title: "Muheshimiwa - Embakasi Central Campaign",
   description: "Vote for Real Change. Hon. Mejja Donk for Embakasi Central MP",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/icons/logo.png" }],
   openGraph: {
     title: "Muheshimiwa Campaign",
     description: "Real Maendeleo for Embakasi Central",
@@ -31,11 +32,11 @@ export default async function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#016629" />
         <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icons/logo.png" />
       </head>
-      <body className="bg-white font-sans">
-        <SessionProvider session={session}>
-          <TRPCReactProvider>
+      <body suppressHydrationWarning className="bg-white font-sans">
+        <Providers session={session}>
+          <VisitTracker />
           {/* Navigation Header */}
           <nav className="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-md">
             <div className="mx-auto flex max-w-7xl items-center justify-between px-3 py-2 md:px-4 md:py-3">
@@ -44,8 +45,15 @@ export default async function RootLayout({
                 href="/"
                 className="flex items-center gap-2 font-bold text-md-green transition hover:opacity-75 flex-shrink-0"
               >
-                <div className="flex h-9 w-9 md:h-10 md:w-10 items-center justify-center rounded-full bg-gradient-to-br from-md-green to-green-700 text-white font-bold text-sm md:text-lg shadow-sm flex-shrink-0">
-                  MD
+                <div className="relative h-9 w-9 overflow-hidden rounded-full border border-gray-200 shadow-sm md:h-10 md:w-10 flex-shrink-0">
+                  <Image
+                    src="/icons/logo.png"
+                    alt="Mejja Donk logo"
+                    fill
+                    sizes="40px"
+                    className="object-cover"
+                    priority
+                  />
                 </div>
                 <div className="hidden xs:flex flex-col">
                   <span className="text-xs md:text-sm font-bold leading-tight">Muheshimiwa</span>
@@ -60,6 +68,9 @@ export default async function RootLayout({
                 </Link>
                 <Link href="/projects" className="px-3 py-2 text-xs md:text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 transition whitespace-nowrap">
                   Maendeleo
+                </Link>
+                <Link href="/bursaries" className="px-3 py-2 text-xs md:text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 transition whitespace-nowrap">
+                  Bursaries
                 </Link>
                 <Link href="/polling-stations" className="px-3 py-2 text-xs md:text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 transition whitespace-nowrap">
                   Find Station
@@ -97,12 +108,15 @@ export default async function RootLayout({
                       <Link href="/projects" className="hover:text-md-gold">
                         Projects
                       </Link>
-                      
-                    
+                    </li>
+                    <li>
+                      <Link href="/bursaries" className="hover:text-md-gold">
+                        Bursaries
+                      </Link>
                     </li>
                     <li>
                       <Link href="/about" className="hover:text-md-gold">
-                       Meet the team
+                        Meet the team
                       </Link>
                     </li>
                     <li>
@@ -123,6 +137,11 @@ export default async function RootLayout({
                     <li>
                       <Link href="/projects" className="hover:text-md-gold">
                         See Our Work
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/bursaries" className="hover:text-md-gold">
+                        Bursaries
                       </Link>
                     </li>
                     <li>
@@ -148,8 +167,7 @@ export default async function RootLayout({
               </div>
             </div>
           </footer>
-        </TRPCReactProvider>
-        </SessionProvider>
+        </Providers>
       </body>
     </html>
   );

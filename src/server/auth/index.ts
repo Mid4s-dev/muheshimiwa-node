@@ -1,10 +1,20 @@
+import "server-only";
+
 import NextAuth from "next-auth";
-import { cache } from "react";
+import { getServerSession } from "next-auth";
+import type { NextAuthOptions } from "next-auth";
 
 import { authConfig } from "./config";
 
-const { auth: uncachedAuth, handlers, signIn, signOut } = NextAuth(authConfig);
+export const authOptions: NextAuthOptions = authConfig;
 
-const auth = cache(uncachedAuth);
+export async function auth() {
+  return getServerSession(authOptions);
+}
 
-export { auth, handlers, signIn, signOut };
+export const authHandler = NextAuth(authOptions);
+
+// Server-side signIn/signOut are NextAuth v5 APIs.
+// In v4, use signIn from "next-auth/react" client-side.
+export const signIn = async () => ({ error: "UNSUPPORTED_SERVER_SIGNIN" });
+export const signOut = async () => ({ ok: true });

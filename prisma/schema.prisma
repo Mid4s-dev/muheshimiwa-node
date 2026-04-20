@@ -90,15 +90,32 @@ model Project {
     description String   @db.Text
     category    String   // "Bursaries", "Infrastructure", "Security"
     image       String?
+    location    String?
     status      String   @default("active") // "active", "completed", "planned"
     ward        String?
     impact      String?  // e.g., "5000 households"
+    media       ProjectMedia[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 
     @@index([category])
     @@index([ward])
+}
+
+model ProjectMedia {
+    id        String   @id @default(cuid())
+    projectId String
+    project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+    url       String   @db.Text
+    caption   String?
+    sortOrder Int      @default(0)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([projectId])
+    @@index([projectId, sortOrder])
 }
 
 model PollingStation {

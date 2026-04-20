@@ -2,39 +2,194 @@ import { z } from "zod";
 import { createTRPCRouter, publicProcedure, protectedProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
 import { sendCampaignEmail } from "~/server/utils/email";
+import { env } from "~/env";
 
-// MoveSMS API function for mass SMS
-async function sendBulkSMS(phoneNumbers: string[], message: string): Promise<{ success: number; failed: number }> {
-  let successCount = 0;
-  let failedCount = 0;
+type MobitechValidateResponse = {
+  status_code?: number;
+  status_desc?: string;
+  mobile?: string;
+  network?: string;
+};
 
-  for (const phone of phoneNumbers) {
-    try {
-      const response = await fetch("https://api.movesms.io/sms/send", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.MOVESMS_API_KEY}`,
-        },
-        body: JSON.stringify({
-          phone,
-          message,
-        }),
-      });
+type MobitechSendMultipleResponse = {
+  status_code?: number;
+  status_desc?: string;
+  schedule_details?: Array<{
+    mobile?: string;
+    schedule_status?: string;
+    schedule_desc?: string;
+  }>;
+};
 
-      if (response.ok) {
-        successCount++;
-      } else {
-        console.error(`Failed to send SMS to ${phone}:`, await response.text());
-        failedCount++;
-      }
-    } catch (error) {
-      console.error(`Error sending SMS to ${phone}:`, error);
-      failedCount++;
-    }
+type CampaignRecipient = {
+  id?: string;
+  name: string;
+  email: string | null;
+  phoneNumber: string;
+};
+
+function normalizeToKenyanMsisdn(raw: string): string {
+  const digits = raw.replace(/\s+/g, "").replace(/^\+/, "");
+
+  if (/^254\d{9}$/.test(digits)) {
+    return `+${digits}`;
   }
 
-  return { success: successCount, failed: failedCount };
+  if (/^0\d{9}$/.test(digits)) {
+    return `+254${digits.slice(1)}`;
+  }
+
+  if (/^7\d{8}$/.test(digits)) {
+    return `+254${digits}`;
+  }
+
+  return raw;
+}
+
+async function validateMobileNumber(mobile: string): Promise<boolean> {
+  if (!env.MOBITECH_API_KEY) {
+    return true;
+  }
+
+  try {
+    const response = await fetch(
+      `https://app.mobitechtechnologies.com/sms/mobile?mobile=${encodeURIComponent(mobile)}&return=json`,
+      {
+        method: "GET",
+        headers: {
+          h_api_key: env.MOBITECH_API_KEY,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      return false;
+    }
+
+    const data = (await response.json()) as MobitechValidateResponse;
+    return data.status_code === 1000 || !!data.mobile;
+  } catch (error) {
+    console.error(`Mobitech mobile validation failed for ${mobile}:`, error);
+    return false;
+  }
+}
+
+async function sendBulkSMS(
+  phoneNumbers: string[],
+  message: string
+): Promise<{ success: number; failed: number }> {
+  if (!env.MOBITECH_API_KEY) {
+    throw new Error("Mobitech API key is missing. Set MOBITECH_API_KEY in your environment.");
+  }
+
+  const shortcode = env.MOBITECH_SHORTCODE ?? "MOBI-TECH";
+  const serviceId = env.MOBITECH_SERVICE_ID ?? "0";
+  const shouldValidate = env.MOBITECH_VALIDATE_NUMBERS === "true";
+
+  const normalized = phoneNumbers.map(normalizeToKenyanMsisdn);
+
+  const validNumbers = shouldValidate
+    ? (
+        await Promise.all(
+          normalized.map(async (mobile) => {
+            const ok = await validateMobileNumber(mobile);
+            return ok ? mobile : null;
+          })
+        )
+      ).filter((value): value is string => value !== null)
+    : normalized;
+
+  if (validNumbers.length === 0) {
+    return { success: 0, failed: phoneNumbers.length };
+  }
+
+  const payload = {
+    serviceId,
+    shortcode,
+    messages: validNumbers.map((mobile, index) => ({
+      mobile,
+      message,
+      client_ref: `${Date.now()}-${index}`,
+    })),
+  };
+
+  const response = await fetch("https://app.mobitechtechnologies.com/sms/sendmultiple", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      h_api_key: env.MOBITECH_API_KEY,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`Mobitech sendmultiple failed: ${response.status} ${errorText}`);
+  }
+
+  const data = (await response.json()) as MobitechSendMultipleResponse;
+  const scheduleDetails = data.schedule_details ?? [];
+
+  if (data.status_code !== 1000) {
+    const statusDesc = data.status_desc ?? "Unknown Mobitech error";
+    throw new Error(`Mobitech SMS rejected request: ${statusDesc}`);
+  }
+
+  const scheduledSuccess = scheduleDetails.filter((item) => item.schedule_status === "1").length;
+  const scheduledFailed = validNumbers.length - scheduledSuccess;
+  const invalidCount = phoneNumbers.length - validNumbers.length;
+
+  return {
+    success: scheduledSuccess,
+    failed: scheduledFailed + invalidCount,
+  };
+}
+
+async function resolveRecipients(input: {
+  selectedContacts?: string[];
+  ward?: string;
+  singleRecipientEmail?: string;
+  singleRecipientPhone?: string;
+  singleRecipientName?: string;
+}): Promise<CampaignRecipient[]> {
+  if (input.singleRecipientEmail || input.singleRecipientPhone) {
+    return [
+      {
+        name: input.singleRecipientName?.trim() || "Supporter",
+        email: input.singleRecipientEmail ?? null,
+        phoneNumber: input.singleRecipientPhone ?? "",
+      },
+    ];
+  }
+
+  if (input.selectedContacts && input.selectedContacts.length > 0) {
+    return db.mailingList.findMany({
+      where: { id: { in: input.selectedContacts }, status: "active" },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phoneNumber: true,
+      },
+    });
+  }
+
+  if (input.ward) {
+    return db.mailingList.findMany({
+      where: {
+        ward: input.ward,
+        status: "active",
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phoneNumber: true,
+      },
+    });
+  }
+
+  throw new Error("Provide selected contacts, ward, or a single recipient.");
 }
 
 function createCampaignEmailHTML(name: string, subject: string, message: string): string {
@@ -187,29 +342,17 @@ export const mailingListRouter = createTRPCRouter({
         message: z.string().min(10).max(5000),
         selectedContacts: z.array(z.string()).optional(),
         ward: z.string().optional(),
+        singleRecipientEmail: z.string().email().optional(),
+        singleRecipientName: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
-      let contacts;
-
-      if (input.selectedContacts && input.selectedContacts.length > 0) {
-        contacts = await db.mailingList.findMany({
-          where: {
-            id: { in: input.selectedContacts },
-            email: { not: null },
-          },
-        });
-      } else if (input.ward) {
-        contacts = await db.mailingList.findMany({
-          where: {
-            ward: input.ward,
-            status: "active",
-            email: { not: null },
-          },
-        });
-      } else {
-        throw new Error("Must provide either selectedContacts or ward");
-      }
+      const contacts = await resolveRecipients({
+        selectedContacts: input.selectedContacts,
+        ward: input.ward,
+        singleRecipientEmail: input.singleRecipientEmail,
+        singleRecipientName: input.singleRecipientName,
+      });
 
       let successCount = 0;
       let failedCount = 0;
@@ -229,7 +372,7 @@ export const mailingListRouter = createTRPCRouter({
 
       return {
         success: true,
-        message: `Email campaign sent! Success: ${successCount}, Failed: ${failedCount}`,
+        message: `Email sent. Success: ${successCount}, Failed: ${failedCount}`,
         stats: { successCount, failedCount, totalAttempted: contacts.length },
       };
     }),
@@ -240,34 +383,22 @@ export const mailingListRouter = createTRPCRouter({
         message: z.string().min(5).max(160),
         selectedContacts: z.array(z.string()).optional(),
         ward: z.string().optional(),
+        singleRecipientPhone: z.string().optional(),
       })
     )
     .mutation(async ({ input }) => {
-      let contacts;
+      const contacts = await resolveRecipients({
+        selectedContacts: input.selectedContacts,
+        ward: input.ward,
+        singleRecipientPhone: input.singleRecipientPhone,
+      });
 
-      if (input.selectedContacts && input.selectedContacts.length > 0) {
-        contacts = await db.mailingList.findMany({
-          where: {
-            id: { in: input.selectedContacts },
-          },
-        });
-      } else if (input.ward) {
-        contacts = await db.mailingList.findMany({
-          where: {
-            ward: input.ward,
-            status: "active",
-          },
-        });
-      } else {
-        throw new Error("Must provide either selectedContacts or ward");
-      }
-
-      const phoneNumbers = contacts.map((c) => c.phoneNumber);
+      const phoneNumbers = contacts.map((c) => c.phoneNumber).filter(Boolean);
       const result = await sendBulkSMS(phoneNumbers, input.message);
 
       return {
         success: true,
-        message: `SMS campaign sent! Success: ${result.success}, Failed: ${result.failed}`,
+        message: `SMS sent. Success: ${result.success}, Failed: ${result.failed}`,
         stats: result,
       };
     }),

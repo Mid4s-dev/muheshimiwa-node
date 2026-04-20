@@ -4,6 +4,7 @@ import { pollingStationRouter } from "~/server/api/routers/polling-station";
 import { bursaryDistributionRouter } from "~/server/api/routers/bursary-distribution";
 import { impactStoryRouter } from "~/server/api/routers/impact-story";
 import { projectRouter } from "~/server/api/routers/project";
+import { adminRouter } from "~/server/api/routers/admin";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 
 /**
@@ -18,6 +19,7 @@ export const appRouter = createTRPCRouter({
   bursaryDistribution: bursaryDistributionRouter,
   impactStory: impactStoryRouter,
   project: projectRouter,
+  admin: adminRouter,
 });
 
 // export type definition of API

@@ -56,15 +56,15 @@ model Session {
 }
 
 model User {
-  id            String               @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
-  email         String?              @unique
-  phone         String?              @unique
+  email         String?   @unique
+  phone         String?   @unique
   passwordHash  String?
   emailVerified DateTime?
   image         String?
   ward          String?
-  role          String               @default("voter") // "voter", "admin"
+  role          String    @default("voter") // "voter", "admin"
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
@@ -84,22 +84,38 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// Muheshimiwa-specific Models
 model Project {
-  id          String  @id @default(cuid())
+  id          String         @id @default(cuid())
   title       String
-  description String  @db.Text
+  description String         @db.Text
   category    String // "Bursaries", "Infrastructure", "Security"
   image       String?
-  status      String  @default("active") // "active", "completed", "planned"
+  location    String?
+  status      String         @default("active") // "active", "completed", "planned"
   ward        String?
   impact      String? // e.g., "5000 households"
+  media       ProjectMedia[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([category])
   @@index([ward])
+}
+
+model ProjectMedia {
+  id        String  @id @default(cuid())
+  projectId String
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url       String  @db.Text
+  caption   String?
+  sortOrder Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
+  @@index([projectId, sortOrder])
 }
 
 model PollingStation {
