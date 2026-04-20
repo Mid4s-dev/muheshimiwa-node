@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { api } from "~/trpc/server";
+import { ProjectsCarousel } from "./_components/projects-carousel";
 
 export const revalidate = 0;
 
@@ -8,7 +9,13 @@ export default async function HomePage() {
   const impactStories = await api.impactStory.getFeatured();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
   const projects = await api.project.getAll();
-  const featuredProjects = projects.slice(0, 3);
+  const featuredProjects = projects.slice(0, 8).map((project) => ({
+    id: project.id,
+    title: project.title,
+    description: project.description,
+    category: project.category,
+    image: project.image ?? project.media?.[0]?.url ?? null,
+  }));
 
   const stats = [
     { number: "500+", label: "Students Sponsored", description: "Higher education scholarships" },
@@ -178,30 +185,7 @@ export default async function HomePage() {
           <h2 className="mb-12 text-center text-4xl font-bold text-md-green md:text-5xl">
             Recent Maendeleo Successes
           </h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            {featuredProjects.map((project) => {
-              const projectImage = project.image ?? project.media?.[0]?.url ?? null;
-
-              return (
-              <div key={project.id} className="rounded-lg bg-gray-50 p-6 shadow transition hover:shadow-lg">
-                {projectImage && (
-                  <div className="mb-4 h-40 overflow-hidden rounded-lg bg-gray-200">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={projectImage} alt={project.title} className="h-full w-full object-cover" />
-                  </div>
-                )}
-                <div className="mb-3 inline-block rounded-full bg-md-gold px-3 py-1 text-sm font-semibold text-md-dark">
-                  {project.category}
-                </div>
-                <h3 className="mb-2 text-xl font-bold text-md-dark">{project.title}</h3>
-                <p className="mb-4 line-clamp-2 text-gray-700">{project.description}</p>
-                <Link href="/projects" className="text-md-green font-semibold hover:underline">
-                  Learn More
-                </Link>
-              </div>
-              );
-            })}
-          </div>
+          <ProjectsCarousel projects={featuredProjects} />
         </div>
       </section>
 

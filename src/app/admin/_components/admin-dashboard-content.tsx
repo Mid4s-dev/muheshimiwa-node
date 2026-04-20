@@ -39,6 +39,7 @@ export function AdminDashboardContent() {
   const [activeSection, setActiveSection] = useState<AdminSection>("overview");
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [editingPollingId, setEditingPollingId] = useState<string | null>(null);
+  const [editingImpactId, setEditingImpactId] = useState<string | null>(null);
 
   const [projectForm, setProjectForm] = useState({
     title: "",
@@ -188,6 +189,23 @@ export function AdminDashboardContent() {
 
   const createImpactMutation = api.impactStory.create.useMutation({
     onSuccess: async () => {
+      setEditingImpactId(null);
+      setImpactForm({
+        title: "",
+        description: "",
+        image: "",
+        ward: "",
+        impact: "",
+        featured: true,
+      });
+      await utils.impactStory.getAll.invalidate();
+      await utils.admin.stats.invalidate();
+    },
+  });
+
+  const updateImpactMutation = api.impactStory.update.useMutation({
+    onSuccess: async () => {
+      setEditingImpactId(null);
       setImpactForm({
         title: "",
         description: "",
@@ -205,6 +223,17 @@ export function AdminDashboardContent() {
     onSuccess: async () => {
       await utils.impactStory.getAll.invalidate();
       await utils.admin.stats.invalidate();
+    },
+  });
+
+  const deleteSupporterMutation = api.mailingList.delete.useMutation({
+    onSuccess: async () => {
+      await utils.mailingList.getAll.invalidate();
+      await utils.mailingList.getStats.invalidate();
+      await utils.admin.stats.invalidate();
+    },
+    onError: (error) => {
+      alert(error.message);
     },
   });
 
@@ -293,7 +322,41 @@ export function AdminDashboardContent() {
 
   const handleImpactSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (editingImpactId) {
+      await updateImpactMutation.mutateAsync({
+        id: editingImpactId,
+        ...impactForm,
+      });
+      return;
+    }
+
     await createImpactMutation.mutateAsync(impactForm);
+  };
+
+  const handleEditImpactStory = (story: (typeof impactStories)[number]) => {
+    setEditingImpactId(story.id);
+    setImpactForm({
+      title: story.title,
+      description: story.description,
+      image: story.image ?? "",
+      ward: story.ward ?? "",
+      impact: story.impact ?? "",
+      featured: story.featured,
+    });
+    setActiveSection("impact");
+  };
+
+  const resetImpactEditor = () => {
+    setEditingImpactId(null);
+    setImpactForm({
+      title: "",
+      description: "",
+      image: "",
+      ward: "",
+      impact: "",
+      featured: true,
+    });
   };
 
   const handleEditPollingStation = (station: (typeof pollingStations)[number]) => {
@@ -891,7 +954,20 @@ export function AdminDashboardContent() {
                 onSubmit={handleImpactSubmit}
                 className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm"
               >
-                <h2 className="text-lg font-semibold text-gray-900">Add Impact Story</h2>
+                <div className="flex items-start justify-between gap-4">
+                  <h2 className="text-lg font-semibold text-gray-900">
+                    {editingImpactId ? "Edit Impact Story" : "Add Impact Story"}
+                  </h2>
+                  {editingImpactId && (
+                    <button
+                      type="button"
+                      onClick={resetImpactEditor}
+                      className="rounded-lg border border-gray-300 px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
+                    >
+                      Cancel edit
+                    </button>
+                  )}
+                </div>
                 <div className="mt-4 grid gap-4 md:grid-cols-2">
                   <input
                     required
@@ -952,10 +1028,16 @@ export function AdminDashboardContent() {
                 />
                 <button
                   type="submit"
-                  disabled={createImpactMutation.isPending}
+                  disabled={createImpactMutation.isPending || updateImpactMutation.isPending}
                   className="mt-4 rounded-lg bg-md-green px-4 py-2 text-sm font-semibold text-white"
                 >
-                  {createImpactMutation.isPending ? "Saving..." : "Add Impact Story"}
+                  {editingImpactId
+                    ? updateImpactMutation.isPending
+                      ? "Updating..."
+                      : "Update Impact Story"
+                    : createImpactMutation.isPending
+                      ? "Saving..."
+                      : "Add Impact Story"}
                 </button>
               </form>
 
@@ -968,6 +1050,12 @@ export function AdminDashboardContent() {
                   description: story.description,
                 }))}
                 onDelete={(id) => deleteImpactMutation.mutate({ id })}
+                onEdit={(id) => {
+                  const story = impactStories.find((item) => item.id === id);
+                  if (story) {
+                    handleEditImpactStory(story);
+                  }
+                }}
               />
             </section>
           )}
@@ -993,6 +1081,7 @@ export function AdminDashboardContent() {
                       <th className="px-3 py-2 text-left">Email</th>
                       <th className="px-3 py-2 text-left">Ward</th>
                       <th className="px-3 py-2 text-left">Joined</th>
+                      <th className="px-3 py-2 text-left">action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1004,6 +1093,14 @@ export function AdminDashboardContent() {
                         <td className="px-3 py-2">{supporter.ward ?? "-"}</td>
                         <td className="px-3 py-2">
                           {new Date(supporter.createdAt).toLocaleDateString()}
+                        </td>
+                        <td className="px-3 py-2">
+                          <button
+                            onClick={() => deleteSupporterMutation.mutate({ id: supporter.id })}
+                            className="rounded-lg bg-red-500 px-4 py-2 text-sm font-semibold text-white"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))}
