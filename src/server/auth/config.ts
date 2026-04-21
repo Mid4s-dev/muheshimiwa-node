@@ -139,14 +139,16 @@ export const authConfig = {
         user && "phone" in user && typeof user.phone === "string" ? user.phone : undefined;
       const userWard =
         user && "ward" in user && typeof user.ward === "string" ? user.ward : undefined;
+      const tokenPhone = typeof token.phone === "string" ? token.phone : undefined;
+      const tokenWard = typeof token.ward === "string" ? token.ward : undefined;
 
       return {
         ...session,
         user: {
           ...session.user,
           id: token.sub ?? session.user?.email ?? "",
-          phone: (token.phone as string | undefined) ?? userPhone,
-          ward: (token.ward as string | undefined) ?? userWard,
+          phone: tokenPhone ?? userPhone,
+          ward: tokenWard ?? userWard,
         },
       };
     },
