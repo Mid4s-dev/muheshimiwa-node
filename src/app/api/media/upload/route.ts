@@ -20,7 +20,8 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const fileEntry = formData.get("file");
-    const folder = sanitizeFolder(formData.get("folder")?.toString() ?? null);
+    const folderValue = formData.get("folder");
+    const folder = sanitizeFolder(typeof folderValue === "string" ? folderValue : null);
 
     if (!(fileEntry instanceof File)) {
       return NextResponse.json({ success: false, error: "Missing image file" }, { status: 400 });

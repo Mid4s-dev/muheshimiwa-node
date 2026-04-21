@@ -144,7 +144,7 @@ export const authConfig = {
         ...session,
         user: {
           ...session.user,
-          id: (token.sub as string | undefined) ?? session.user?.email ?? "",
+          id: token.sub ?? session.user?.email ?? "",
           phone: (token.phone as string | undefined) ?? userPhone,
           ward: (token.ward as string | undefined) ?? userWard,
         },

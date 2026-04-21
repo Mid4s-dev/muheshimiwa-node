@@ -6,7 +6,7 @@ const optionalString = z.string().optional();
 
 function normalizeOptionalString(value?: string | null) {
   const normalized = value?.trim();
-  return normalized ? normalized : undefined;
+  return normalized;
 }
 
 function normalizeGalleryImages(images?: Array<string | null | undefined>) {

@@ -292,6 +292,42 @@ The application uses these main entities:
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
 
+### Docker image
+
+This repo includes a multi-arch Dockerfile that works on both Intel/AMD64 and ARM64 machines.
+
+Build a local image:
+
+```bash
+docker build \
+   --build-arg DATABASE_URL="mysql://root:root@localhost:3306/mejja" \
+   -t muheshimiwa-md:latest .
+```
+
+Build and publish a multi-platform image with Buildx:
+
+```bash
+docker buildx build \
+   --platform linux/amd64,linux/arm64 \
+   --build-arg DATABASE_URL="mysql://root:root@localhost:3306/mejja" \
+   -t your-registry/muheshimiwa-md:latest \
+   --push .
+```
+
+Run the container:
+
+```bash
+docker run --rm -p 3000:3000 \
+   -e DATABASE_URL="mysql://root:root@your-db-host:3306/mejja" \
+   -e AUTH_SECRET="replace-me" \
+   -e SMTP_HOST="replace-me" \
+   -e SMTP_USER="replace-me" \
+   -e SMTP_PASSWORD="replace-me" \
+   muheshimiwa-md:latest
+```
+
+Set your real production environment variables at runtime, especially `DATABASE_URL`, `AUTH_SECRET`, SMTP settings, and any Mobitech values.
+
 ## Admin Credential Setup
 
 ### Local Development

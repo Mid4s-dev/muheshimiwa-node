@@ -153,9 +153,11 @@ async function resolveRecipients(input: {
   singleRecipientName?: string;
 }): Promise<CampaignRecipient[]> {
   if (input.singleRecipientEmail || input.singleRecipientPhone) {
+    const normalizedName = input.singleRecipientName?.trim();
+
     return [
       {
-        name: input.singleRecipientName?.trim() || "Supporter",
+        name: normalizedName && normalizedName.length > 0 ? normalizedName : "Supporter",
         email: input.singleRecipientEmail ?? null,
         phoneNumber: input.singleRecipientPhone ?? "",
       },
@@ -356,14 +358,22 @@ export const mailingListRouter = createTRPCRouter({
 
       let successCount = 0;
       let failedCount = 0;
+      let skippedNoEmail = 0;
 
       for (const contact of contacts) {
-        if (!contact.email) continue;
+        if (!contact.email) {
+          skippedNoEmail++;
+          continue;
+        }
 
         try {
           const emailHTML = createCampaignEmailHTML(contact.name, input.subject, input.message);
-          await sendCampaignEmail(contact.email, contact.name, input.subject, emailHTML);
-          successCount++;
+          const sent = await sendCampaignEmail(contact.email, contact.name, input.subject, emailHTML);
+          if (sent) {
+            successCount++;
+          } else {
+            failedCount++;
+          }
         } catch (error) {
           console.error(`Failed to send email to ${contact.email}:`, error);
           failedCount++;
@@ -372,8 +382,14 @@ export const mailingListRouter = createTRPCRouter({
 
       return {
         success: true,
-        message: `Email sent. Success: ${successCount}, Failed: ${failedCount}`,
-        stats: { successCount, failedCount, totalAttempted: contacts.length },
+        message: `Email sent. Success: ${successCount}, Failed: ${failedCount}, Skipped (no email): ${skippedNoEmail}`,
+        stats: {
+          successCount,
+          failedCount,
+          skippedNoEmail,
+          totalRecipients: contacts.length,
+          totalAttempted: contacts.length - skippedNoEmail,
+        },
       };
     }),
 

@@ -35,7 +35,7 @@ export const adminRouter = createTRPCRouter({
       const userId = ctx.session.user.id;
       const user = await ctx.db.user.findUnique({ where: { id: userId } });
 
-      if (!user || user.role !== "admin") {
+      if (user?.role !== "admin") {
         throw new Error("Admin account not found");
       }
 

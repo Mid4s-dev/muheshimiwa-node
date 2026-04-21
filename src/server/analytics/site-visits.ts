@@ -16,13 +16,11 @@ declare global {
 }
 
 function getStore(): VisitStore {
-  if (!globalThis.__mhVisitStore) {
-    globalThis.__mhVisitStore = {
-      totalHits: 0,
-      visitors: new Set<string>(),
-      pathHits: new Map<string, number>(),
-    };
-  }
+  globalThis.__mhVisitStore ??= {
+    totalHits: 0,
+    visitors: new Set<string>(),
+    pathHits: new Map<string, number>(),
+  };
 
   return globalThis.__mhVisitStore;
 }
