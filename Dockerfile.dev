@@ -1,0 +1,27 @@
+# Development Dockerfile - supports hot-reload with source mounts
+FROM node:20-bookworm-slim
+
+WORKDIR /app
+
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV SKIP_ENV_VALIDATION=1
+
+# Install system dependencies
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends openssl ca-certificates mysql-client \
+  && rm -rf /var/lib/apt/lists/*
+
+# Install Node dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Copy entrypoint
+COPY docker-entrypoint-dev.sh ./
+RUN chmod +x ./docker-entrypoint-dev.sh
+
+EXPOSE 3000
+
+ENTRYPOINT ["./docker-entrypoint-dev.sh"]

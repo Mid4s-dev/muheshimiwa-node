@@ -7,6 +7,10 @@ import "./src/env.js";
 /** @type {import("next").NextConfig} */
 const config = {
 	output: "standalone",
+	basePath: process.env.NEXT_PUBLIC_BASE_PATH?.trim() || undefined,
+	eslint: {
+		ignoreDuringBuilds: true,
+	},
 };
 
 export default config;

@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { withBasePath } from "~/lib/site-path";
 
 export function VisitTracker() {
   const pathname = usePathname();
@@ -9,7 +10,7 @@ export function VisitTracker() {
   useEffect(() => {
     if (!pathname) return;
 
-    void fetch("/api/analytics/visit", {
+    void fetch(withBasePath("/api/analytics/visit"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

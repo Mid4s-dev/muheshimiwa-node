@@ -1,4 +1,37 @@
+import { type Metadata } from "next";
 import Link from "next/link";
+import { env } from "~/env";
+
+const siteUrl = env.NEXT_PUBLIC_SITE_URL ?? "https://mejjadonk.mid4s.site";
+
+export const metadata: Metadata = {
+  title: "Campaign Manifesto - Six Pillars for Change",
+  description: "Muheshimiwa's comprehensive manifesto: Youth jobs, education, infrastructure, healthcare, security, and good governance. Real solutions for Embakasi Central.",
+  keywords: [
+    "manifesto",
+    "campaign platform",
+    "policy",
+    "development",
+    "Embakasi Central",
+  ],
+  alternates: {
+    canonical: `${siteUrl}/manifesto`,
+  },
+  openGraph: {
+    type: "website",
+    url: `${siteUrl}/manifesto`,
+    title: "Manifesto - Six Pillars for Change",
+    description: "Comprehensive platform for youth jobs, education, infrastructure, healthcare, security, and good governance",
+    images: [
+      {
+        url: `${siteUrl}/og-image.svg`,
+        width: 1200,
+        height: 630,
+        alt: "Campaign Manifesto",
+      },
+    ],
+  },
+};
 
 const manifestoPillars = [
   {

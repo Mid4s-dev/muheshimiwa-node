@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { api } from "~/trpc/react";
+import { withAssetPath } from "~/lib/site-path";
 
 export default function ProjectBlogPage() {
   const params = useParams();
@@ -52,7 +53,7 @@ export default function ProjectBlogPage() {
       <article className="mx-auto max-w-4xl overflow-hidden rounded-2xl bg-white shadow-xl">
         {heroImage && (
           <div className="h-72 w-full overflow-hidden bg-gray-100 md:h-96">
-            <img src={heroImage} alt={project.title} className="h-full w-full object-cover" />
+            <img src={withAssetPath(heroImage)} alt={project.title} className="h-full w-full object-cover" />
           </div>
         )}
 
@@ -101,7 +102,7 @@ export default function ProjectBlogPage() {
                   <figure key={media.id} className="overflow-hidden rounded-xl bg-gray-100 shadow-sm">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={media.url}
+                      src={withAssetPath(media.url)}
                       alt={media.caption ?? `${project.title} image ${index + 1}`}
                       className="h-64 w-full object-cover"
                     />

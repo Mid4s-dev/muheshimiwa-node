@@ -1,5 +1,38 @@
+import { type Metadata } from "next";
 import { api } from "~/trpc/server";
 import { BursaryCountdown } from "./_components/bursary-countdown";
+import { env } from "~/env";
+
+const siteUrl = env.NEXT_PUBLIC_SITE_URL ?? "https://mejjadonk.mid4s.site";
+
+export const metadata: Metadata = {
+  title: "Bursaries & Education Support",
+  description: "Track bursary distributions, application deadlines, and education support programs across Embakasi Central. Over 500+ students have been sponsored.",
+  keywords: [
+    "bursaries",
+    "scholarships",
+    "education",
+    "students",
+    "Embakasi Central",
+  ],
+  alternates: {
+    canonical: `${siteUrl}/bursaries`,
+  },
+  openGraph: {
+    type: "website",
+    url: `${siteUrl}/bursaries`,
+    title: "Bursary Programs - Embakasi Central",
+    description: "Education support and scholarship opportunities for students",
+    images: [
+      {
+        url: `${siteUrl}/og-image.svg`,
+        width: 1200,
+        height: 630,
+        alt: "Bursary Support",
+      },
+    ],
+  },
+};
 
 export const revalidate = 0;
 

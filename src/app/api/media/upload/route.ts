@@ -3,6 +3,7 @@ import path from "node:path";
 import { mkdir, writeFile } from "node:fs/promises";
 import { NextResponse } from "next/server";
 import sharp from "sharp";
+import { withBasePath } from "~/lib/site-path";
 
 export const runtime = "nodejs";
 
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      url: `/uploads/${folder}/${fileName}`,
+      url: withBasePath(`/uploads/${folder}/${fileName}`),
       contentType: "image/webp",
       originalName: fileEntry.name,
     });

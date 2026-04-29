@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { api } from "~/trpc/react";
 import { MassMessagingTab } from "./mass-messaging-tab";
+import { withAssetPath, withBasePath } from "~/lib/site-path";
 
 type AdminSection =
   | "overview"
@@ -101,7 +102,7 @@ export function AdminDashboardContent() {
     formData.append("file", file);
     formData.append("folder", folder);
 
-    const response = await fetch("/api/media/upload", {
+    const response = await fetch(withBasePath("/api/media/upload"), {
       method: "POST",
       body: formData,
     });
@@ -718,7 +719,7 @@ export function AdminDashboardContent() {
                           >
                             <div className="h-20 w-28 shrink-0 overflow-hidden rounded-md bg-gray-100">
                               <img
-                                src={image}
+                                src={withAssetPath(image)}
                                 alt={`Gallery image ${index + 1}`}
                                 className="h-full w-full object-cover"
                               />

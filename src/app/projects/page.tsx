@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { api } from "~/trpc/react";
+import { withAssetPath } from "~/lib/site-path";
 
 export default function ProjectsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -82,7 +83,7 @@ export default function ProjectsPage() {
                 {project.image && (
                   <div className="h-48 overflow-hidden bg-gradient-to-br from-md-green/10 to-md-gold/10">
                     <img
-                      src={project.image}
+                      src={withAssetPath(project.image)}
                       alt={project.title}
                       className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     />

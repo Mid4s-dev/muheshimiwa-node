@@ -153,11 +153,9 @@ async function resolveRecipients(input: {
   singleRecipientName?: string;
 }): Promise<CampaignRecipient[]> {
   if (input.singleRecipientEmail || input.singleRecipientPhone) {
-    const normalizedName = input.singleRecipientName?.trim();
-
     return [
       {
-        name: normalizedName && normalizedName.length > 0 ? normalizedName : "Supporter",
+        name: input.singleRecipientName?.trim() || "Supporter",
         email: input.singleRecipientEmail ?? null,
         phoneNumber: input.singleRecipientPhone ?? "",
       },
@@ -358,22 +356,14 @@ export const mailingListRouter = createTRPCRouter({
 
       let successCount = 0;
       let failedCount = 0;
-      let skippedNoEmail = 0;
 
       for (const contact of contacts) {
-        if (!contact.email) {
-          skippedNoEmail++;
-          continue;
-        }
+        if (!contact.email) continue;
 
         try {
           const emailHTML = createCampaignEmailHTML(contact.name, input.subject, input.message);
-          const sent = await sendCampaignEmail(contact.email, contact.name, input.subject, emailHTML);
-          if (sent) {
-            successCount++;
-          } else {
-            failedCount++;
-          }
+          await sendCampaignEmail(contact.email, contact.name, input.subject, emailHTML);
+          successCount++;
         } catch (error) {
           console.error(`Failed to send email to ${contact.email}:`, error);
           failedCount++;
@@ -382,14 +372,8 @@ export const mailingListRouter = createTRPCRouter({
 
       return {
         success: true,
-        message: `Email sent. Success: ${successCount}, Failed: ${failedCount}, Skipped (no email): ${skippedNoEmail}`,
-        stats: {
-          successCount,
-          failedCount,
-          skippedNoEmail,
-          totalRecipients: contacts.length,
-          totalAttempted: contacts.length - skippedNoEmail,
-        },
+        message: `Email sent. Success: ${successCount}, Failed: ${failedCount}`,
+        stats: { successCount, failedCount, totalAttempted: contacts.length },
       };
     }),
 

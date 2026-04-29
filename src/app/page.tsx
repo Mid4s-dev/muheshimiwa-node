@@ -1,6 +1,48 @@
 import Link from "next/link";
+import { type Metadata } from "next";
 import { api } from "~/trpc/server";
 import { ProjectsCarousel } from "./_components/projects-carousel";
+import { withAssetPath } from "~/lib/site-path";
+import { env } from "~/env";
+
+const siteUrl = env.NEXT_PUBLIC_SITE_URL ?? "https://mejjadonk.mid4s.site";
+
+export const metadata: Metadata = {
+  title: "Muheshimiwa - Embakasi Central Campaign",
+  description: "Vote for Real Change. Hon. Mejja Donk for Embakasi Central MP - Proven track record with 500+ students sponsored, 8 wards impacted, and 50+ security initiatives.",
+  keywords: [
+    "Embakasi Central",
+    "Mejja Donk",
+    "campaign",
+    "vote",
+    "bursaries",
+    "projects",
+    "manifesto",
+  ],
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title: "Muheshimiwa - Vote for Real Change",
+    description: "Real leadership for Embakasi Central. Proven track record: 500+ students sponsored, 8 wards transformed.",
+    images: [
+      {
+        url: `${siteUrl}/og-image.svg`,
+        width: 1200,
+        height: 630,
+        alt: "Muheshimiwa Campaign",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Muheshimiwa Campaign - Vote Mejja Donk",
+    description: "Real Maendeleo for Embakasi Central",
+    images: [`${siteUrl}/og-image.svg`],
+  },
+};
 
 export const revalidate = 0;
 
@@ -30,7 +72,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-md-dark py-24 text-white md:py-40">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url("/images/mejjadonkk_bg%20_cover.jpg")' }}
+          style={{ backgroundImage: `url("${withAssetPath("/images/mejjadonkk_bg%20_cover.jpg")}")` }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-md-green/80 via-md-dark/75 to-md-dark/90" />
         <div className="relative z-10 mx-auto max-w-4xl px-4 text-center">

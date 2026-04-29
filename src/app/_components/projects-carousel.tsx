@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRef } from "react";
+import { withAssetPath } from "~/lib/site-path";
 
 type ProjectCarouselItem = {
   id: string;
@@ -62,7 +63,7 @@ export function ProjectsCarousel({ projects }: { projects: ProjectCarouselItem[]
             {project.image && (
               <div className="mb-4 aspect-[16/10] overflow-hidden rounded-xl bg-gray-200">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={project.image} alt={project.title} className="h-full w-full object-cover" />
+                <img src={withAssetPath(project.image)} alt={project.title} className="h-full w-full object-cover" />
               </div>
             )}
             <div className="mb-3 inline-block rounded-full bg-md-gold px-3 py-1 text-xs font-semibold text-md-dark sm:text-sm">

@@ -1,3 +1,38 @@
+import { type Metadata } from "next";
+import { withAssetPath } from "~/lib/site-path";
+import { env } from "~/env";
+
+const siteUrl = env.NEXT_PUBLIC_SITE_URL ?? "https://mejjadonk.mid4s.site";
+
+export const metadata: Metadata = {
+  title: "About the Campaign Team",
+  description: "Meet the committed, multidisciplinary team behind Muheshimiwa campaign. Together delivering practical change for Embakasi Central.",
+  keywords: [
+    "team",
+    "campaign",
+    "leadership",
+    "Embakasi Central",
+    "about us",
+  ],
+  alternates: {
+    canonical: `${siteUrl}/about`,
+  },
+  openGraph: {
+    type: "website",
+    url: `${siteUrl}/about`,
+    title: "Campaign Team - Muheshimiwa",
+    description: "Committed leadership bringing real change to Embakasi Central",
+    images: [
+      {
+        url: `${siteUrl}/og-image.svg`,
+        width: 1200,
+        height: 630,
+        alt: "Campaign Team",
+      },
+    ],
+  },
+};
+
 const teamMembers = [
   {
     name: "Campaign Director",
@@ -53,7 +88,7 @@ export default function AboutPage() {
           {teamMembers.map((member) => (
             <article key={member.name} className="overflow-hidden rounded-2xl bg-white shadow-md transition hover:shadow-xl">
               <div className="h-52 bg-gray-100">
-                <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
+                <img src={withAssetPath(member.image)} alt={member.name} className="h-full w-full object-cover" />
               </div>
               <div className="p-5">
                 <h2 className="text-lg font-bold text-md-dark">{member.name}</h2>

@@ -15,8 +15,31 @@ npm run dev
 ```
 
 The app will be available at:
-- **Local**: http://localhost:3001
-- **Network**: http://192.168.0.106:3001
+
+## 🐳 Docker Setup (Recommended for Local & Cloud Deployment)
+
+Run the entire app (Next.js + MySQL) with a single command:
+
+```bash
+# Development mode with hot-reload
+./start-docker.sh dev
+
+# Production mode
+./start-docker.sh
+
+# Access at http://localhost:3000
+```
+
+**First time?** See [DOCKER_QUICK_START.md](./DOCKER_QUICK_START.md) for setup instructions.
+
+Benefits:
+- ✅ No manual MySQL setup required
+- ✅ Hot-reload in development mode
+- ✅ Same container for local dev and cloud deployment
+- ✅ Automatic database migrations and seeding
+- ✅ Production-optimized multi-stage build
+
+For detailed Docker documentation, see [DOCKER_SETUP.md](./DOCKER_SETUP.md).
 
 ## Technology Stack
 
